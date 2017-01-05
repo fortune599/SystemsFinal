@@ -1,0 +1,49 @@
+Team: Jackson Morgan, Suwamik Paul, Fortune Soleil
+
+We intend to create a turn-based PvP battle game that uses networking to allow players to challenge one another. We will use Final
+Fantasy and other, similar RPGs as a model; specifically for player abilities and menu structure. We are going to establish a system
+with both magical and physical attacks as well as distinct combinations to boost effectiveness. Players will be able to create parties
+of characters from different classes with unique abilities and stat boosts. There will be at least basic AI functionality for single
+player play and/or testing purposes.
+
+User Interface:
+Completely text-based, within the terminal. After launching, users will be asked to select their play
+preference (solo/test/practice or PvP), and then their abilities. A few options will be available for this initial selection,
+in order to create some variety between games. Next, if applicable, they will be connected with another user who has undergone
+the same process; otherwise, they will be facing the AI. Once in game, players will be given text prompts and commands options
+to enter in order to select their moves. 
+
+Technical Design:
+-Use fork to create submenus
+-Pipes to communicate (relay selected action back to parent)
+-Networking for PvP aspect
+-Takes text input from the user to determine their actions
+-Use reading from files to retrieve character information
+
+Breakdown and responsibility:
+  -Creative Design - Team Effort
+	-Class and stat integration - Jackson
+	-Coding attack effects (damage, healing, etc.) - Suwamik
+	-Interface/Menus/User Input - Fortune
+	-Game-Mode Selection - Fortune
+	-Leaderboards and statistics - Jackson
+	-AI - Suwamik
+	-Networking - Team Effort
+
+Data structures:
+-We will be using a variety of data structures for this project:
+-We will use a file to organize characters’ health, magic, attack, strengths, weaknesses, and other attributes
+-An array will contain the actions selected for that turn, in order to respond to certain combinations
+-We will, of course, need to used ints for computational purposes
+-We will also use chars to format our interface
+-We may wish to use structs to contain each specific character’s information after reading from the file
+Algorithms : 
+	Turn progression/order, damage dealt, ability effects, combination effects, AI, networking
+
+Timeline:
+Basic Text-Based Battle System -- (1/9/16) [one character, against rudimentary AI]
+Expand to encompass multiple characters controlled by the user -- (1/11/16)
+Added features (more magic and attack options and combinations) -- (1/13/16)
+Integrate networking into game -- (1/16/16)
+Optimization of graphical interface -- (1/20/16)
+Add higher-level A.I. functionality for single-player experience -- TIME PERMITTING
