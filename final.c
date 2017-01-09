@@ -15,14 +15,16 @@
 
 int main(){
   int enemy = 3;
-  while(1){
+  int player = 70; 
+   while(1){
     if(!enemy){
       printf("you win\n");
       return 0;
     }
     char a[256];
-    printf("Enemy health is: %d\n", enemy); 
-    printf("Enter a to attack, enter s to cast spell, enter d to skip turn\n");
+    printf("Enemy health is: %d\n", enemy);
+    printf("Your health is: %d\n", player); 
+    printf("Enter a to attack, enter s to cast spell, enter d to defend\n");
     fgets(a,sizeof(a),stdin);
     if(a[0] == 'a'){
       enemy --;
@@ -33,7 +35,10 @@ int main(){
     if(a[0] == 'd'){
       enemy = enemy;
     }
+
+  player --;
+  printf("Enemy attacks\n");
     
-  }
+}
   return 0;
 }
