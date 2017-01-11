@@ -24,7 +24,9 @@ int randint() {
 
 int main(){
   int enemy = 3;
+  int enemyd = 0;
   int player = 3;
+  int playerd = 0;
    while(1){
      int ai = randint() % 3;
     if(!enemy){
@@ -40,27 +42,50 @@ int main(){
     printf("Your health is: %d\n", player); 
     printf("Enter a to attack, enter s to cast spell, enter d to defend\n");
     fgets(a,sizeof(a),stdin);
+    playerd = 0;
     if(a[0] == 'a'){
-      enemy --;
+      if(enemyd == 1){
+	printf("enemy defends attack\n");
+      }
+      else{
+	enemy --;
+      }
     }
     if(a[0] == 's'){
+      if(enemyd == 1){
+	printf("enemy defends spell\n");
+      }
+      else{
       enemy --;
+      }
     }
     if(a[0] == 'd'){
-      enemy = enemy; // implement further
+      playerd ++; // implement further
     }
 
     // glitch sometimes no action is taken
+    enemyd = 0;
     if(ai == 0){
+      if(playerd == 1){
+	printf("You defended enemy attack\n");
+      }
+      else{
       printf("Enemy attacks\n");
       player --;
+      }
     }
     if(ai == 1){
+      if(playerd == 1){
+	printf("You defended enemy spell\n");
+      }
+      else{
       printf("Enemy casts spell\n");
       player --;
+      }
     }
     if(ai == 2){
-      printf("Enemy defends\n");// implement further 
+      printf("Enemy defends\n");
+      enemyd ++;// implement further 
     }
     
     
