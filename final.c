@@ -10,6 +10,16 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+struct character{
+  char* name;
+  int hp;
+  int atk;
+  int def;
+  int matk;
+  int mdef;
+  int spd;
+  char** friends;
+};
 
 int randint() {
   int fd = open( "/dev/random", O_RDONLY ); //open file
