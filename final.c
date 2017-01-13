@@ -13,13 +13,29 @@
 struct character{
   char* name;
   int hp;
+  int ap;
   int atk;
   int def;
   int matk;
   int mdef;
-  int spd;
-  char** friends;
+  int itv;
+  char* friend;
 };
+
+void setValue(int * stat, int newVal){
+  *stat = newVal;
+}
+
+void damage(int platk, int endef, int enhp){
+  enhp -=  (platk * platk) / endef;
+}
+
+void mdamage(int plmatk, int platk, int plap, int enmdef, int enhp, int cost){
+  plap -= cost;
+  enhp -= ((plmatk * plmatk) + platk) / enmdef;
+}
+
+
 
 int randint() {
   int fd = open( "/dev/random", O_RDONLY ); //open file
@@ -33,6 +49,9 @@ int randint() {
 
 
 int main(){
+  struct character Gordon;
+  setValue(&Gordon.atk, 30);
+  //printf("%d\n",Gordon.atk);
   int enemy = 3;
   int enemyd = 0;
   int player = 3;
