@@ -35,8 +35,6 @@ void mdamage(int plmatk, int platk, int plap, int enmdef, int enhp, int cost){
   enhp -= ((plmatk * plmatk) + platk) / enmdef;
 }
 
-
-
 int randint() {
   int fd = open( "/dev/random", O_RDONLY ); //open file
   int *buff = malloc(sizeof(int)); //initialize buff by allocating mem
@@ -47,11 +45,38 @@ int randint() {
   return *buff; //dereference randomly generated number
 }
 
+void initialize( char ** daddy ) {
+  int fd = open( "Players.txt", O_RDONLY );
+  char buff[1024];
+  read( fd, buff, sizeof(buff) );
+  close( fd );
+  //printf("%s\n", buff);
+  
+  int i = 0;
 
+  char * s = buff;
+  //printf("hi\n");
+  
+  while( s ){
+    daddy[i] = strsep(&s, "\n");
+    i++;
+  }
+  //printf("hi\n");
+  
+  int x = strlen(*daddy);
+  for ( x; x > 0; x-- ){
+    printf("%d\n", x);
+    printf("%s\n", daddy[x]);
+  }
+}
+  
+  
 int main(){
   struct character Gordon;
   setValue(&Gordon.atk, 30);
   //printf("%d\n",Gordon.atk);
+  char ** daddy = (char **)malloc(sizeof(char*));
+  initialize(daddy);
   int enemy = 3;
   int enemyd = 0;
   int player = 3;
