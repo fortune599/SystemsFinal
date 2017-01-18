@@ -22,6 +22,9 @@ struct character{
   char* friend;
 };
 
+struct character Gordon;
+struct character Percy;
+
 void setValue(int * stat, int newVal){
   *stat = newVal;
 }
@@ -45,7 +48,7 @@ int randint() {
   return *buff; //dereference randomly generated number
 }
 
-void initialize( char ** daddy ) {
+/*void initialize( char ** daddy ) {
   int fd = open( "Players.txt", O_RDONLY );
   char buff[1024];
   read( fd, buff, sizeof(buff) );
@@ -61,22 +64,132 @@ void initialize( char ** daddy ) {
     daddy[i] = strsep(&s, "\n");
     i++;
   }
-  //printf("hi\n");
+  printf("ssdasd\n");
+  printf("%s\n", *s);
   
   int x = strlen(*daddy);
   for ( x; x > 0; x-- ){
     printf("%d\n", x);
     printf("%s\n", daddy[x]);
   }
+  }*/
+
+/*void initialize(){
+  int fd = open( "Players.txt", O_RDONLY );
+  char buff[1024];
+  read( fd, buff, sizeof(buff) );
+  close(fd);
+  printf("%s\n", buff);
+  char ** b = (char **)(malloc(sizeof(char *)));
+  int w = 0;
+  char * s = buff;
+  printf("cool\n"); 
+  while(s){
+    b[w] = strsep(&s, "\n");
+    printf("%s\n", strsep(&s, "\n"));
+    w ++;
+  }
+  printf("cool\n"); 
+  printf("%s\n", b[0]);
+  printf("%s\n", b[1]);
+  char ** z = (char **)(malloc(sizeof(char *)));
+  int y = 0;
+  char * v = b;
+  while(v){
+    int pl = 0;
+    while(v[y]){
+      z[y] = strsep(&v, ",");
+      y ++;
+
+    y  ++;
+    
+  // int i = 0;
+  //while(b[i]){
+  //int f = 0;
+  //while(b[i][f]){
+  //
+  //  f ++;
+  //}
+
+  //i ++;
 }
-  
-  
+*/ 
+
+
+
+void parse(char * a, char * spliter){
+  if(a[0] == NULL){
+    char ** b = (char **)(malloc(sizeof(char *)));
+    int w = 0;
+    char * s = b;
+    while(s){
+      b[w] = strsep(&s, spliter);
+      //printf("%s\n", strsep(&s, ";"));
+      w ++;
+    }
+    int i = 0;
+    while(b[i], ","){
+      parse(b[i], ",");
+      i ++;
+    }
+  }
+
+  else{
+    char ** b = (char **)(malloc(sizeof(char *)));
+    int w = 0;
+    char * s = a;
+    while(s){
+      b[w] = strsep(&s, spliter);
+      //printf("%s\n", strsep(&s, ";"));
+      w ++;
+    }
+
+    int dw = 0;
+    while(b[dw]){
+      if(dw == 0){
+	setValue(&Gordon.name, b[dw]);
+      }
+      if(dw == 1){
+	setValue(&Gordon.hp, atoi(b[dw]));
+      }
+      if(dw == 2){
+	setValue(&Gordon.ap, atoi(b[dw]));
+      }
+      if(dw == 3){
+	setValue(&Gordon.atk, atoi(b[dw]));
+      }
+      if(dw == 4){
+	setValue(&Gordon.def, atoi(b[dw]));
+      }
+      if(dw == 5){
+	setValue(&Gordon.matk, atoi(b[dw]));
+      }
+      if(dw == 6){
+	setValue(&Gordon.mdef, atoi(b[dw]));
+      }
+      if(dw == 7){
+	setValue(&Gordon.itv, atoi(b[dw]));
+      }
+      if(dw == 8){
+	setValue(&Gordon.friend, b[dw]);
+      }
+
+      dw ++;
+    }
+  }
+}
+
+
+
+
+
 int main(){
-  struct character Gordon;
   setValue(&Gordon.atk, 30);
-  //printf("%d\n",Gordon.atk);
+  parse(NULL, '\n');
+  printf("%d\n",Gordon.atk);
   char ** daddy = (char **)malloc(sizeof(char*));
-  initialize(daddy);
+  char a [1000];
+  //initialize();
   int enemy = 3;
   int enemyd = 0;
   int player = 3;
