@@ -117,7 +117,7 @@ int randint() {
 
 
 
-void parse(char * a, char * spliter){
+/*void parse(char * a, char * spliter){
   if(a[0] == NULL){
     char ** b = (char **)(malloc(sizeof(char *)));
     int w = 0;
@@ -174,21 +174,36 @@ void parse(char * a, char * spliter){
 	setValue(&Gordon.friend, b[dw]);
       }
 
-      dw ++;
-    }
+*/
+
+
+
+char * initclass(int i){
+  char * a[12][9];
+  if(i == 0){
+    a[0][0] = "Gordan";
+    a[0][1] = "1";
+    a[0][2] = "1";
+    a[0][3] = "1";
+    a[0][4] = "1";
+    a[0][5] = "1";
+    a[0][6] = "1";
+    a[0][7] = "1";
+    a[0][8] = "Percy";
   }
+  return a;
 }
 
 
-
-
-
 int main(){
-  setValue(&Gordon.atk, 30);
-  parse(NULL, '\n');
-  printf("%d\n",Gordon.atk);
-  char ** daddy = (char **)malloc(sizeof(char*));
-  char a [1000];
+
+  //char *a = intitclass(0);
+  // printf("%s\n", a[0][0]);
+  //setValue(&Gordon.atk, 30);
+  //parse(NULL, '\n');
+  // printf("%d\n",Gordon.atk);
+  //char ** daddy = (char **)malloc(sizeof(char*));
+  //char a [1000];
   //initialize();
   int enemy = 3;
   int enemyd = 0;
