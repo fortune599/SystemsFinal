@@ -18,12 +18,13 @@ struct character{
   int def;
   int matk;
   int mdef;
-  int itv;
+  int initv;
   char* friend;
 };
 
-struct character Gordon;
-struct character Percy;
+struct character man1;
+struct character man2;
+struct character questioning;
 
 void setValue(int * stat, int newVal){
   *stat = newVal;
@@ -48,7 +49,36 @@ int randint() {
   return *buff; //dereference randomly generated number
 }
 
-/*void initialize( char ** daddy ) {
+void addToStruct( struct character *dude, char *stuff ){
+  int w = 0;
+  char * x;
+  while ( w < 9 ){
+    x = strsep(&stuff, ",");
+    if (w == 0)
+      dude -> name = x;
+    else if (w == 1)
+      dude -> hp = atoi(x);
+    else if (w == 2)
+      dude -> ap = atoi(x);
+    else if (w == 3)
+      dude -> atk = atoi(x);
+    else if (w == 4)
+      dude -> def = atoi(x);
+    else if (w == 5)
+      dude -> matk = atoi(x);
+    else if (w == 6)
+      dude -> mdef = atoi(x);
+    else if (w == 7)
+      dude -> initv = atoi(x);
+    else
+      dude -> friend = x;
+    w++;
+  }
+}
+
+void initialize( char ** gogojuice ) {
+  char ** daddy = (char **)malloc(sizeof(char*));
+
   int fd = open( "Players.txt", O_RDONLY );
   char buff[1024];
   read( fd, buff, sizeof(buff) );
@@ -64,147 +94,19 @@ int randint() {
     daddy[i] = strsep(&s, "\n");
     i++;
   }
-  printf("ssdasd\n");
-  printf("%s\n", *s);
-  
-  int x = strlen(*daddy);
-  for ( x; x > 0; x-- ){
-    printf("%d\n", x);
-    printf("%s\n", daddy[x]);
+
+  int x = 0;
+  for ( x; x < i - 1; x++ ){
+    addToStruct( &man1, daddy[x] );
+    printf("%s\n", man1.friend);
+    gogojuice[x] = strsep(&daddy[x], ",");
+    printf("%s\n", gogojuice[x]);
   }
-  }*/
-
-/*void initialize(){
-  int fd = open( "Players.txt", O_RDONLY );
-  char buff[1024];
-  read( fd, buff, sizeof(buff) );
-  close(fd);
-  printf("%s\n", buff);
-  char ** b = (char **)(malloc(sizeof(char *)));
-  int w = 0;
-  char * s = buff;
-  printf("cool\n"); 
-  while(s){
-    b[w] = strsep(&s, "\n");
-    printf("%s\n", strsep(&s, "\n"));
-    w ++;
-  }
-  printf("cool\n"); 
-  printf("%s\n", b[0]);
-  printf("%s\n", b[1]);
-  char ** z = (char **)(malloc(sizeof(char *)));
-  int y = 0;
-  char * v = b;
-  while(v){
-    int pl = 0;
-    while(v[y]){
-      z[y] = strsep(&v, ",");
-      y ++;
-
-    y  ++;
-    
-  // int i = 0;
-  //while(b[i]){
-  //int f = 0;
-  //while(b[i][f]){
-  //
-  //  f ++;
-  //}
-
-  //i ++;
 }
-*/ 
-
-
-
-/*void parse(char * a, char * spliter){
-  if(a[0] == NULL){
-    char ** b = (char **)(malloc(sizeof(char *)));
-    int w = 0;
-    char * s = b;
-    while(s){
-      b[w] = strsep(&s, spliter);
-      //printf("%s\n", strsep(&s, ";"));
-      w ++;
-    }
-    int i = 0;
-    while(b[i], ","){
-      parse(b[i], ",");
-      i ++;
-    }
-  }
-
-  else{
-    char ** b = (char **)(malloc(sizeof(char *)));
-    int w = 0;
-    char * s = a;
-    while(s){
-      b[w] = strsep(&s, spliter);
-      //printf("%s\n", strsep(&s, ";"));
-      w ++;
-    }
-
-    int dw = 0;
-    while(b[dw]){
-      if(dw == 0){
-	setValue(&Gordon.name, b[dw]);
-      }
-      if(dw == 1){
-	setValue(&Gordon.hp, atoi(b[dw]));
-      }
-      if(dw == 2){
-	setValue(&Gordon.ap, atoi(b[dw]));
-      }
-      if(dw == 3){
-	setValue(&Gordon.atk, atoi(b[dw]));
-      }
-      if(dw == 4){
-	setValue(&Gordon.def, atoi(b[dw]));
-      }
-      if(dw == 5){
-	setValue(&Gordon.matk, atoi(b[dw]));
-      }
-      if(dw == 6){
-	setValue(&Gordon.mdef, atoi(b[dw]));
-      }
-      if(dw == 7){
-	setValue(&Gordon.itv, atoi(b[dw]));
-      }
-      if(dw == 8){
-	setValue(&Gordon.friend, b[dw]);
-      }
-
-*/
-
-
-
-char * initclass(int i){
-  char * a[12][9];
-  if(i == 0){
-    a[0][0] = "Gordan";
-    a[0][1] = "1";
-    a[0][2] = "1";
-    a[0][3] = "1";
-    a[0][4] = "1";
-    a[0][5] = "1";
-    a[0][6] = "1";
-    a[0][7] = "1";
-    a[0][8] = "Percy";
-  }
-  return a;
-}
-
 
 int main(){
-
-  //char *a = intitclass(0);
-  // printf("%s\n", a[0][0]);
-  //setValue(&Gordon.atk, 30);
-  //parse(NULL, '\n');
-  // printf("%d\n",Gordon.atk);
-  //char ** daddy = (char **)malloc(sizeof(char*));
-  //char a [1000];
-  //initialize();
+  char ** daddy = (char **)malloc(sizeof(char*));
+  initialize(daddy);
   int enemy = 3;
   int enemyd = 0;
   int player = 3;
