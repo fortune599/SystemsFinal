@@ -54,8 +54,10 @@ void addToStruct( struct character *dude, char *stuff ){
   char * x;
   while ( w < 9 ){
     x = strsep(&stuff, ",");
-    if (w == 0)
+    if (w == 0){
       dude -> name = x;
+      printf("%d: %s\n",w,x);
+    }
     else if (w == 1)
       dude -> hp = atoi(x);
     else if (w == 2)
@@ -102,9 +104,10 @@ void initialize( char ** gogojuice ) {
       addToStruct( &man1, daddy[x] );
     }
     else if(x == 1){
-      printf("affirmative\n");
-       addToStruct( &man2, daddy[x] );
-      }
+      //printf("%s\n",daddy[x]);	    
+      //printf("affirmative\n");
+      addToStruct( &man2, daddy[x] );
+    }
     //gogojuice[x] = strsep(&daddy[x], ",");
     //printf("%s\n", gogojuice[x]);
   }
@@ -113,8 +116,9 @@ void initialize( char ** gogojuice ) {
 int main(){
   char ** daddy = (char **)malloc(sizeof(char*));
   initialize(daddy);
+  printf("test2\n");
   printf("%d\n", man1.atk);
-  printf("%s\n", man2.friend);
+  //printf("%s\n", man1.friend);
   //printf("%s\n", man2.friend);
   int enemy = 3;
   int enemyd = 0;
@@ -128,26 +132,26 @@ int main(){
   option[2] = questioning;
   struct character using[3];
   int chosen = 0;
-   while(1){
-     if(!chosen){
-       printf("Welcome\n");
-       printf("Choose 3 classes with the corresponding number keys seperated by spaces\n");
-       printf("(1)Gordan\n");
-       printf("(2)Percy\n");
-       printf("(3)????\n");
-       char class[266];
-       fgets(class,sizeof(class),stdin);
-       //using[0] = option[class[atoi(0)] -1];
-       //using[1] = option[class[atoi(2)] -1];
-       //using[2] = option[class[atoi(3)] -1];
-       // printf("working: %s", using[0].atk);
-       chosen ++;
+  while(1){
+    if(!chosen){
+      printf("Welcome\n");
+      printf("Choose 3 classes with the corresponding number keys seperated by spaces\n");
+      printf("(1)Gordan\n");
+      printf("(2)Percy\n");
+      printf("(3)????\n");
+      char class[266];
+      fgets(class,sizeof(class),stdin);
+      //using[0] = option[class[atoi(0)] -1];
+      //using[1] = option[class[atoi(2)] -1];
+      //using[2] = option[class[atoi(3)] -1];
+      // printf("working: %s", using[0].atk);
+      chosen ++;
 
 
-     }
+    }
 
      
-     int ai = randint() % 3;
+    int ai = randint() % 3;
     if(!enemy){
       printf("you win\n");
       return 0;
@@ -175,7 +179,7 @@ int main(){
 	printf("enemy defends spell\n");
       }
       else{
-      enemy --;
+	enemy --;
       }
     }
     if(a[0] == 'd'){
@@ -189,8 +193,8 @@ int main(){
 	printf("You defended enemy attack\n");
       }
       else{
-      printf("Enemy attacks\n");
-      player --;
+	printf("Enemy attacks\n");
+	player --;
       }
     }
     if(ai == 1){
@@ -198,8 +202,8 @@ int main(){
 	printf("You defended enemy spell\n");
       }
       else{
-      printf("Enemy casts spell\n");
-      player --;
+	printf("Enemy casts spell\n");
+	player --;
       }
     }
     if(ai == 2){
@@ -211,6 +215,6 @@ int main(){
     printf("------------------\n");
   
     
-}
+  }
   return 0;
 }
