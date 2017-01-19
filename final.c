@@ -156,10 +156,10 @@ int main(){
   while(1){
     if(!chosen){
       printf("Welcome\n");
-      printf("Choose 3 classes with the corresponding number keys seperated by spaces\n");
-      printf("(1)Gordon\n");
-      printf("(2)Percy\n");
-      printf("(3)Thomas\n");
+      printf("Choose 3 characters with the corresponding number keys seperated by spaces\n");
+      printf("(1)Gordon [Bad]\n");
+      printf("(2)Percy [Decent stats]\n");
+      printf("(3)Thomas [All-around high stats]\n");
       char class[266];
       fgets(class,sizeof(class),stdin);
       printf("%s: %d HP\n", man1.name, man1.hp);
