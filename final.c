@@ -10,6 +10,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "networking.c"
+#include "server.c"
+#include "client.c"
+
 struct character{
   char* name;
   int hp;
@@ -138,6 +142,10 @@ int main(){
     else
       isServer = -1;
   }
+
+  //if (isServer = 1)
+  //serve();
+  
   char * t = "Snowden,5,5,5,5,5,5,5,Edward";
   //addToStruct(&test,t); didnt work for some reason
   test.name = "Edward";
