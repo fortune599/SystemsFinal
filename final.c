@@ -54,10 +54,8 @@ void addToStruct( struct character *dude, char *stuff ){
   char * x;
   while ( w < 9 ){
     x = strsep(&stuff, ",");
-    if (w == 0){
+    if (w == 0)
       dude -> name = x;
-      printf("%d: %s\n",w,x);
-    }
     else if (w == 1)
       dude -> hp = atoi(x);
     else if (w == 2)
@@ -78,9 +76,10 @@ void addToStruct( struct character *dude, char *stuff ){
   }
 }
 
-void initialize( char ** gogojuice ) {
+void initialize( ) {
+  char ** gogojuice = (char **)malloc(sizeof(char*));
   char ** daddy = (char **)malloc(sizeof(char*));
-
+  
   int fd = open( "Players.txt", O_RDONLY );
   char buff[1024];
   read( fd, buff, sizeof(buff) );
@@ -88,7 +87,7 @@ void initialize( char ** gogojuice ) {
   //printf("%s\n", buff);
   
   int i = 0;
-
+  
   char * s = buff;
   //printf("hi\n");
   
@@ -96,7 +95,7 @@ void initialize( char ** gogojuice ) {
     daddy[i] = strsep(&s, "\n");
     i++;
   }
-  printf("i: %d\n", i);
+  printf("test1\n");
   int x = 0;
   for ( x; x < i - 1; x++ ){
     printf("%s\n", daddy[x]);
@@ -114,10 +113,11 @@ void initialize( char ** gogojuice ) {
 }
 
 int main(){
-  char ** daddy = (char **)malloc(sizeof(char*));
-  initialize(daddy);
+  initialize();
   printf("test2\n");
-  printf("%d\n", man1.atk);
+  printf("[1] name: %s; friend: %s\n", man1.name, man1.friend);
+  printf("[2] name: %s; friend: %s\n", man2.name, man2.friend);
+  printf("\n");
   //printf("%s\n", man1.friend);
   //printf("%s\n", man2.friend);
   int enemy = 3;
@@ -136,7 +136,7 @@ int main(){
     if(!chosen){
       printf("Welcome\n");
       printf("Choose 3 classes with the corresponding number keys seperated by spaces\n");
-      printf("(1)Gordan\n");
+      printf("(1)Gordon\n");
       printf("(2)Percy\n");
       printf("(3)????\n");
       char class[266];
