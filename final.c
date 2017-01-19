@@ -24,7 +24,10 @@ struct character{
 
 struct character man1;
 struct character man2;
-struct character questioning;
+struct character man3;
+
+//test case
+struct character test;
 
 void setValue(int * stat, int newVal){
   *stat = newVal;
@@ -76,7 +79,7 @@ void addToStruct( struct character *dude, char *stuff ){
   }
 }
 
-void initialize( ) {
+void initialize( ) {  
   char ** gogojuice = (char **)malloc(sizeof(char*));
   char ** daddy = (char **)malloc(sizeof(char*));
   
@@ -107,12 +110,30 @@ void initialize( ) {
       //printf("affirmative\n");
       addToStruct( &man2, daddy[x] );
     }
+    else if(x == 2){
+      //printf("%s\n",daddy[x]);	    
+      //printf("affirmative\n");
+      addToStruct( &man3, daddy[x] );
+    }
     //gogojuice[x] = strsep(&daddy[x], ",");
     //printf("%s\n", gogojuice[x]);
   }
 }
 
 int main(){
+  char * t = "Snowden,5,5,5,5,5,5,5,Edward";
+  //addToStruct(&test,t); didnt work for some reason
+  test.name = "Edward";
+  test.hp = 5;
+  test.ap = 5;
+  test.atk = 5;
+  test.def = 5;
+  test.matk = 5;
+  test.mdef = 5;
+  test.initv = 5;
+  test.friend = "Snowden";
+  printf("%s\n\n", test.friend);
+  
   initialize();
   printf("test2\n");
   printf("[1] name: %s; friend: %s\n", man1.name, man1.friend);
@@ -129,7 +150,7 @@ int main(){
   struct character option[12];
   option[0] = man1;
   option[1] = man2;
-  option[2] = questioning;
+  option[2] = man3;
   struct character using[3];
   int chosen = 0;
   while(1){
@@ -138,9 +159,12 @@ int main(){
       printf("Choose 3 classes with the corresponding number keys seperated by spaces\n");
       printf("(1)Gordon\n");
       printf("(2)Percy\n");
-      printf("(3)????\n");
+      printf("(3)Thomas\n");
       char class[266];
       fgets(class,sizeof(class),stdin);
+      printf("%s: %d HP\n", man1.name, man1.hp);
+      printf("%s: %d HP\n", man2.name, man2.hp);
+      printf("%s: %d HP\n", man3.name, man3.hp);
       //using[0] = option[class[atoi(0)] -1];
       //using[1] = option[class[atoi(2)] -1];
       //using[2] = option[class[atoi(3)] -1];
@@ -162,18 +186,24 @@ int main(){
     }
     char a[256];
     printf("Enemy health is: %d\n", enemy);
-    printf("Your health is: %d\n", player); 
+    //printf("Your health is: %d\n", player); 
     printf("Enter a to attack, enter s to cast spell, enter d to defend\n");
     fgets(a,sizeof(a),stdin);
     playerd = 0;
     if(a[0] == 'a'){
+      printf("Which enemy?"); //gonna have an array of enemies to select who to attack
+      
       if(enemyd == 1){
 	printf("enemy defends attack\n");
+	//at this point only gordon is attack for test purposes
+	// also the 10 is relative at this point
+	damage(man1.atk, test.def + 10, test.hp);
       }
       else{
-	enemy --;
+	damage(man1.atk, test.def, test.hp);
       }
     }
+    // we cant do magic attacks until we get the different spells we are going to use
     if(a[0] == 's'){
       if(enemyd == 1){
 	printf("enemy defends spell\n");
@@ -190,11 +220,13 @@ int main(){
     enemyd = 0;
     if(ai == 0){
       if(playerd == 1){
+	//should randomly select an enemy
 	printf("You defended enemy attack\n");
+	damage(test.atk, man1.def + 10, man1.hp);	
       }
       else{
 	printf("Enemy attacks\n");
-	player --;
+	damage(test.atk, man2.def + 10, man1.hp);
       }
     }
     if(ai == 1){
