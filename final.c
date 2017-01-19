@@ -26,6 +26,8 @@ struct character man1;
 struct character man2;
 struct character man3;
 
+struct character party[3];
+
 //test case
 struct character test;
 
@@ -104,16 +106,19 @@ void initialize( ) {
     printf("%s\n", daddy[x]);
     if(x == 0){
       addToStruct( &man1, daddy[x] );
+      party[x] = man1;
     }
     else if(x == 1){
       //printf("%s\n",daddy[x]);	    
       //printf("affirmative\n");
       addToStruct( &man2, daddy[x] );
+      party[x] = man2;
     }
     else if(x == 2){
       //printf("%s\n",daddy[x]);	    
       //printf("affirmative\n");
       addToStruct( &man3, daddy[x] );
+      party[x] = man3;
     }
     //gogojuice[x] = strsep(&daddy[x], ",");
     //printf("%s\n", gogojuice[x]);
@@ -121,6 +126,18 @@ void initialize( ) {
 }
 
 int main(){
+  int isServer = -1;
+  char b[2];
+  while (isServer == -1){
+    printf("Do you want to be a server (type s) or client (type c)?\n");
+    fgets(b,sizeof(b),stdin);
+    if (b[0] == 's')
+      isServer = 1;
+    else if (b[0] == 'c')
+      isServer = 0;
+    else
+      isServer = -1;
+  }
   char * t = "Snowden,5,5,5,5,5,5,5,Edward";
   //addToStruct(&test,t); didnt work for some reason
   test.name = "Edward";
@@ -162,9 +179,6 @@ int main(){
       printf("(3)Thomas [All-around high stats]\n");
       char class[266];
       fgets(class,sizeof(class),stdin);
-      printf("%s: %d HP\n", man1.name, man1.hp);
-      printf("%s: %d HP\n", man2.name, man2.hp);
-      printf("%s: %d HP\n", man3.name, man3.hp);
       //using[0] = option[class[atoi(0)] -1];
       //using[1] = option[class[atoi(2)] -1];
       //using[2] = option[class[atoi(3)] -1];
