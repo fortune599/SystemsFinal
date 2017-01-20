@@ -8,7 +8,7 @@
 void process( char * s );
 void sub_server( int sd );
 
-int main() {
+int serve() {
 
   int sd, connection;
 

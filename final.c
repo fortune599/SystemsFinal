@@ -144,8 +144,10 @@ int main(){
       isServer = -1;
   }
 
-  if (isServer == 1)
+  if (isServer == 1){
+    set(1);
     serve();
+  }
   char k[100];
   char *args[2];
   args[0]= "client";

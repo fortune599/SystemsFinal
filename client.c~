@@ -5,7 +5,7 @@
 
 #include "networking.h"
 
-int main( int argc, char *argv[] ) {
+int clien( int argc, char *argv[] ) {
 
   char *host;
   if (argc != 2 ) {
