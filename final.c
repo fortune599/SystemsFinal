@@ -11,6 +11,7 @@
 #include <unistd.h>
 
 #include "networking.c"
+#include "networking.h"
 #include "server.c"
 #include "client.c"
 
@@ -143,10 +144,21 @@ int main(){
       isServer = -1;
   }
 
-  //if (isServer = 1)
-  //serve();
+  if (isServer == 1)
+    serve();
+  char k[100];
+  char *args[2];
+  args[0]= "client";
   
-  char * t = "Snowden,5,5,5,5,5,5,5,Edward";
+  if (isServer == 0){
+    printf("Please enter IP address of server you would like to join\n");
+    fgets(k,sizeof(k),stdin);
+    args[1] = k;
+    clien(1,args);
+  }
+	  
+  
+  //char * t = "Snowden,5,5,5,5,5,5,5,Edward";
   //addToStruct(&test,t); didnt work for some reason
   test.name = "Edward";
   test.hp = 5;
