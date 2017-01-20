@@ -21,11 +21,11 @@ int serve() {
 
   sd = server_setup();
     
-  if (doit) {
+  
 
     connection = server_connect( sd );
 
-   
+    if (doit) { 
 
     int f = fork();
     if ( f == 0 ) {

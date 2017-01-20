@@ -145,9 +145,9 @@ int main(){
   }
 
   if (isServer == 1){
-    set(0);
+    set(1);
     serve();
-    set(0);
+    //set(0);
   }
   char k[100];
   char *args[2];
@@ -157,9 +157,9 @@ int main(){
     printf("Please enter IP address of server you would like to join\n");
     fgets(k,sizeof(k),stdin);
     args[1] = k;
-    set1(0);
+    set1(1);
     clien(1,args);
-    set1(0);
+    //set1(0);
   }
 	  
   

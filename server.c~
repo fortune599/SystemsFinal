@@ -8,15 +8,24 @@
 void process( char * s );
 void sub_server( int sd );
 
+int doit = 1;
+
+void set(int i){
+  doit = i;
+}
+
+
 int serve() {
 
   int sd, connection;
 
   sd = server_setup();
     
-  while (1) {
+  if (doit) {
 
     connection = server_connect( sd );
+
+   
 
     int f = fork();
     if ( f == 0 ) {
