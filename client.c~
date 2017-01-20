@@ -5,6 +5,12 @@
 
 #include "networking.h"
 
+int doit1 = 0;
+
+void set1(int i){
+  doit1 = i;
+}
+
 int clien( int argc, char *argv[] ) {
 
   char *host;
@@ -21,7 +27,7 @@ int clien( int argc, char *argv[] ) {
 
   char buffer[MESSAGE_BUFFER_SIZE];
   
-  while (1) {
+  if (doit1) {
     printf("enter message: ");
     fgets( buffer, sizeof(buffer), stdin );
     char *p = strchr(buffer, '\n');

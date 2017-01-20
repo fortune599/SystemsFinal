@@ -9,9 +9,17 @@ void process( char * s );
 void sub_server( int sd );
 
 int doit = 1;
+int sending;
+
+char get[MESSAGE_BUFFER_SIZE];
 
 void set(int i){
   doit = i;
+}
+
+void sendclient(char send[MESSAGE_BUFFER_SIZE]){
+  strncpy(get,send,MESSAGE_BUFFER_SIZE);
+  sending = 1;
 }
 
 
@@ -26,7 +34,7 @@ int serve() {
     connection = server_connect( sd );
 
     if (doit) { 
-
+      
     int f = fork();
     if ( f == 0 ) {
 
@@ -50,7 +58,10 @@ void sub_server( int sd ) {
 
     printf("[SERVER %d] received: %s\n", getpid(), buffer );
     process( buffer );
-    write( sd, buffer, sizeof(buffer));    
+    write( sd, buffer, sizeof(buffer));
+    if(sending){
+      write( sd, get, sizeof(get));
+    }
   }
   
 }

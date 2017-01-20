@@ -130,6 +130,7 @@ void initialize( ) {
   }
 }
 
+
 int main(){
   int isServer = -1;
   char b[2];
@@ -145,6 +146,7 @@ int main(){
   }
 
   if (isServer == 1){
+    sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
     set(1);
     serve();
     //set(0);
@@ -157,6 +159,7 @@ int main(){
     printf("Please enter IP address of server you would like to join\n");
     fgets(k,sizeof(k),stdin);
     args[1] = k;
+    sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
     set1(1);
     clien(1,args);
     //set1(0);
