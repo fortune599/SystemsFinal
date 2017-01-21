@@ -212,26 +212,30 @@ int main(){
   printf("first: %d\n", option[1].name);
   printf("first: %d\n", option[2].name);
   struct character using[3];
+  int  pick[3];
   int chosen = 0;
   while(1){
     if(!chosen){
       printf("Welcome\n");
       printf("Choose 3 characters with the corresponding number keys seperated by spaces\n");
-      printf("(1)Gordon [Bad]\n");
-      printf("(2)Percy [Decent stats]\n");
-      printf("(3)Thomas [All-around high stats]\n");
+      printf("(0)Gordon [Bad]\n");
+      printf("(1)Percy [Decent stats]\n");
+      printf("(2)Thomas [All-around high stats]\n");
       char class[266];
       fgets(class,sizeof(class),stdin); // this first fgets is getting something else strange, need to do twice
       char class1[266];
       fgets(class1,sizeof(class1),stdin);
       printf("class1: %s\n", class1);
-      copystruct(&using[0], &option[atoi(class1[0]) -1]);
-      copystruct(&using[1], &option[atoi(class1[2]) -1]);
-      copystruct(&using[2], &option[atoi(class1[3]) -1]);      
-      //printf("working: %d", using[0].name);
-      //printf("working: %d", using[1].name);
-      //printf("working: %d", using[2].name);
-      //chosen = 1;
+      //copystruct(&using[0], &option[atoi(class1[0])]); /////////////////NEED TO MAKE IT ADD TO USING
+      //copystruct(&using[1], &option[atoi(class1[2])]);
+      //copystruct(&using[2], &option[atoi(class1[4])]);
+      pick[0] = class1[0];
+      pick[1] = class1[2];
+      pick[2] = class1[4];
+      printf("working: %d\n", pick[0]);
+      printf("working: %d\n", pick[1]);
+      printf("working: %d\n", pick[2]);
+      chosen = 1;
 
 
     }
