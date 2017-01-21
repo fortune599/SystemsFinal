@@ -235,6 +235,21 @@ int main(){
       printf("working: %d\n", pick[0]);
       printf("working: %d\n", pick[1]);
       printf("working: %d\n", pick[2]);
+      //if (isServer == 1){
+      //sendclient("0,1,2"); // by putting this here can send custom info from server to client (string only)
+      //set(1);
+      //serve();
+      //}
+      //char *args[2];
+      //args[0]= "client";
+  
+      //     if (isServer == 0){
+      //sendserv("0,1,2"); // allows you to send custom info from client to the server (string only)
+      //set1(1);
+      //clien(1,args);
+    //set1(0);
+      //}
+    ///NETWORKING DOES NOT WORK SERVER IN USE ERROR OR SOMETHING 
       chosen = 1;
 
 
