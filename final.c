@@ -224,10 +224,13 @@ int main(){
       fgets(class,sizeof(class),stdin); // this first fgets is getting something else strange, need to do twice
       char class1[266];
       fgets(class1,sizeof(class1),stdin);
-      //using[0] = option[class[atoi(0)] -1];
-      //using[1] = option[class[atoi(2)] -1];
-      //using[2] = option[class[atoi(3)] -1];
-      //printf("working: %s", using[0].name);
+      printf("class1: %s\n", class1);
+      copystruct(&using[0], &option[atoi(class1[0]) -1]);
+      copystruct(&using[1], &option[atoi(class1[2]) -1]);
+      copystruct(&using[2], &option[atoi(class1[3]) -1]);      
+      //printf("working: %d", using[0].name);
+      //printf("working: %d", using[1].name);
+      //printf("working: %d", using[2].name);
       //chosen = 1;
 
 
