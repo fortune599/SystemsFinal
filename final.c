@@ -224,6 +224,8 @@ int main(){
  
       }
   else{
+    break;
+  }
       /*int ai = randint() % 3;
       if(!enemy){
 	printf("you win\n");
