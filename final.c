@@ -157,8 +157,8 @@ int main(){
   
   if (isServer == 0){
     printf("Please enter IP address of server you would like to join\n");
-    fgets(k,sizeof(k),stdin);
-    args[1] = k;
+    //fgets(k,sizeof(k),stdin);
+    //args[1] = k;
     sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
     set1(1);
     clien(1,args);
@@ -177,7 +177,7 @@ int main(){
   test.mdef = 5;
   test.initv = 5;
   test.friend = "Snowden";
-  printf("%s\n\n", test.friend);
+  //printf("%s\n\n", test.friend);
   
   initialize();
   printf("test2\n");

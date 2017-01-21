@@ -56,7 +56,7 @@ void sub_server( int sd ) {
   char buffer[MESSAGE_BUFFER_SIZE];
   while (read( sd, buffer, sizeof(buffer) )) {
 
-    printf("[SERVER %d] received: %s\n", getpid(), buffer );
+    printf("[SERVER %d] received: %s", getpid(), buffer );
     process( buffer );
     write( sd, buffer, sizeof(buffer));
     if(sending){
