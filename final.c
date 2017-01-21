@@ -16,7 +16,7 @@
 #include "client.c"
 
 struct character{
-  char* name;
+  int name;
   int hp;
   int ap;
   int atk;
@@ -24,7 +24,7 @@ struct character{
   int matk;
   int mdef;
   int initv;
-  char* friend;
+  int friend;
 };
 
 struct character man1;
@@ -65,7 +65,7 @@ void addToStruct( struct character *dude, char *stuff ){
   while ( w < 9 ){
     x = strsep(&stuff, ",");
     if (w == 0)
-      dude -> name = x;
+      dude -> name = atoi(x);
     else if (w == 1)
       dude -> hp = atoi(x);
     else if (w == 2)
@@ -81,9 +81,21 @@ void addToStruct( struct character *dude, char *stuff ){
     else if (w == 7)
       dude -> initv = atoi(x);
     else
-      dude -> friend = x;
+      dude -> friend = atoi(x);
     w++;
   }
+}
+
+void copystruct(struct character *s1, struct character *s2){
+  s1 -> name = s2 -> name;
+  s1 -> hp = s2 -> hp;
+  s1 -> ap = s2 -> ap;
+  s1 -> atk = s2 -> atk;
+  s1 -> def = s2 -> def;
+  s1 -> matk = s2 ->matk;
+  s1 -> mdef = s2 ->mdef;
+  s1 -> initv = s2 -> initv;
+  s1 -> friend = s2 -> friend;
 }
 
 void initialize( ) {  
@@ -108,7 +120,7 @@ void initialize( ) {
   printf("test1\n");
   int x = 0;
   for ( x; x < i - 1; x++ ){
-    printf("%s\n", daddy[x]);
+    printf("%d\n", daddy[x]);
     if(x == 0){
       addToStruct( &man1, daddy[x] );
       party[x] = man1;
@@ -168,7 +180,7 @@ int main(){
   
   //char * t = "Snowden,5,5,5,5,5,5,5,Edward";
   //addToStruct(&test,t); didnt work for some reason
-  test.name = "Edward";
+  test.name = 7;
   test.hp = 5;
   test.ap = 5;
   test.atk = 5;
@@ -176,13 +188,13 @@ int main(){
   test.matk = 5;
   test.mdef = 5;
   test.initv = 5;
-  test.friend = "Snowden";
+  test.friend = 4;
   //printf("%s\n\n", test.friend);
   
   initialize();
   printf("test2\n");
-  printf("[1] name: %s; friend: %s\n", man1.name, man1.friend);
-  printf("[2] name: %s; friend: %s\n", man2.name, man2.friend);
+  printf("[1] name: %d; friend: %d\n", man1.name, man1.friend);
+  printf("[2] name: %d; friend: %d\n", man2.name, man2.friend);
   printf("\n");
   //printf("%s\n", man1.friend);
   //printf("%s\n", man2.friend);
@@ -193,9 +205,12 @@ int main(){
   // make array with all classes
   //then array for ones in use
   struct character option[12];
-  option[0] = man1;
-  option[1] = man2;
-  option[2] = man3;
+  copystruct(&option[0], &man1);
+  copystruct(&option[1], &man2);
+  copystruct(&option[2], &man3);
+  printf("first: %d\n", option[0].name);
+  printf("first: %d\n", option[1].name);
+  printf("first: %d\n", option[2].name);
   struct character using[3];
   int chosen = 0;
   while(1){
@@ -206,17 +221,18 @@ int main(){
       printf("(2)Percy [Decent stats]\n");
       printf("(3)Thomas [All-around high stats]\n");
       char class[266];
-      fgets(class,sizeof(class),stdin);
+      fgets(class,sizeof(class),stdin); // this first fgets is getting something else strange, need to do twice
+      char class1[266];
+      fgets(class1,sizeof(class1),stdin);
       //using[0] = option[class[atoi(0)] -1];
       //using[1] = option[class[atoi(2)] -1];
       //using[2] = option[class[atoi(3)] -1];
-      // printf("working: %s", using[0].atk);
-      chosen ++;
+      //printf("working: %s", using[0].name);
+      //chosen = 1;
 
 
     }
-
-     
+    else{     
     int ai = randint() % 3;
     if(!enemy){
       printf("you win\n");
@@ -289,6 +305,7 @@ int main(){
     printf("------------------\n");
   
     
+    }
   }
   return 0;
 }
