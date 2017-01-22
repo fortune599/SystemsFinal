@@ -215,10 +215,10 @@ int main(){
       printf("we made it here\n");
       initialize(c1,c2,c3);
 
-      if (isServer == 1)
-	sendclient(c1);
-      if (isServer == 0)
-	sendserv(c1);
+      //if (isServer == 1)
+      //sendclient(c1);
+      //if (isServer == 0)
+      //	sendserv(c1);
       
       chosen = 1;
  
