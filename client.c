@@ -44,9 +44,9 @@ int clien( int argc, char *argv[] ) {
   
     write( sd, buffer, sizeof(buffer) );
     read( sd, buffer, sizeof(buffer) );
-    printf( "received: %s\n", buffer );
+    //printf( "received: %s\n", buffer );
     read( sd, buffer, sizeof(buffer) );
-    printf( "basic way for server to send info: %s\n", buffer );
+    //printf( "basic way for server to send info: %s\n", buffer );
     if (sending1){
       write( sd, get1, sizeof(get1) );
     }

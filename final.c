@@ -10,8 +10,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-//#include "networking.c"
-//#include "networking.h"
+#include "networking.c"
+#include "networking.h"
 #include "server.c"
 #include "client.c"
 
@@ -216,13 +216,13 @@ int main(){
       }
       printf("we made it here\n");
       initialize(c1,c2,c3);
-
-      //if (isServer == 1)
-      //sendclient(c1);
-      //if (isServer == 0)
-      //	sendserv(c1);
       
       chosen = 1;
+
+      if (isServer)
+	sendclient(c1);
+      else if(!isServer)
+	sendserv(c1);
  
       }
   else{
