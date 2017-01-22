@@ -1,7 +1,7 @@
 all: file
 
 file: server.o client.o networking.o final.o
-	gcc -o final server.o client.o networking.o
+	gcc -o final server.o client.o networking.o final.o
 
 final.o: final.c
 	gcc -c final.c
