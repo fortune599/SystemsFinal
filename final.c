@@ -223,14 +223,19 @@ int main(){
 
       if (isServer){
 	sendclient(c1);
-	serve();
-	printf("what is up %s",gotvalue());
+	printf("what is up %s\n",serve());
       }    
       else if(!isServer){
 	sendserv(c1);
 	clien(1,args);
 	printf(gotvalue1());
       }
+      
+      if (isServer){
+	
+	
+	printf("what is up %s\n",gotvalue());
+      }    
       }
   else{
     break;

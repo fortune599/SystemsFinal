@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
+#include <sys/stat.h>
+
 
 #include "networking.h"
 
@@ -39,7 +44,7 @@ void sdone(){
 
 int sd;
 
-int serve() {
+char * serve() {
   int connection;
 
   
@@ -64,7 +69,8 @@ int serve() {
       close( connection );
     }
   }
-  return 0;
+  printf("give: %s\n", give);
+  return give;
 }
 
 
@@ -73,12 +79,15 @@ void sub_server( int sd ) {
   char buffer[MESSAGE_BUFFER_SIZE];
   read( sd, buffer, sizeof(buffer) );
   strcpy(give,buffer);
-  printf("give: %s\n", give);
-  process( buffer );
+  int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
+  write(sd,give,sizeof(give));
+  //printf("give: %s\n", give);
+  //process( buffer );
   write( sd, buffer, sizeof(buffer));
   if(sending){
-    write( sd, get, sizeof(get));
+    write( fd, get, sizeof(get));
   }
+  //printf("give: %s\n", give);
 }
   
 
