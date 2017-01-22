@@ -72,15 +72,3 @@ void process( char * s ) {
     s++;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,10 +1,11 @@
-all: file
 
-file: server.o client.o networking.o final.o
-	gcc -o final server.o client.o networking.o final.o
+all: server client
 
-final.o: final.c
-	gcc -c final.c
+server: server.o networking.o
+	gcc -o server server.o networking.o
+
+client: client.o networking.o
+	gcc -o client client.o networking.o
 
 server.o: server.c networking.h
 	gcc -c server.c
