@@ -34,9 +34,9 @@ void sendclient(char send[MESSAGE_BUFFER_SIZE]){
   sending = 1;
 }
 
-char * gotvalue(){
-  return give;
-}
+//char * gotvalue(){
+//return give;
+//}
 
 void sdone(){
   done = 1;
@@ -44,7 +44,7 @@ void sdone(){
 
 int sd;
 
-char * serve() {
+int serve() {
   int connection;
 
   
@@ -69,8 +69,8 @@ char * serve() {
       close( connection );
     }
   }
-  printf("give: %s\n", give);
-  return give;
+  //printf("give: %s\n", give);
+  return 0;
 }
 
 
@@ -87,6 +87,7 @@ void sub_server( int sd ) {
   if(sending){
     write( fd, get, sizeof(get));
   }
+  close(fd);
   //printf("give: %s\n", give);
 }
   

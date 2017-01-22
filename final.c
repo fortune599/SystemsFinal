@@ -34,6 +34,15 @@ struct character party[3];
 
 //test case
 struct character test;
+char  save[1000];
+
+char * getvalue7(){
+  int fd = open( "store.txt", O_RDONLY);
+  read(fd,save,sizeof(save));
+  close(fd);
+  printf("wtf %s", save);
+  return save;
+}
 
 void setValue(int * stat, int newVal){
   *stat = newVal;
@@ -223,18 +232,13 @@ int main(){
 
       if (isServer){
 	sendclient(c1);
-	printf("what is up %s\n",serve());
+	serve();
+	printf(getvalue7());
       }    
       else if(!isServer){
 	sendserv(c1);
 	clien(1,args);
 	printf(gotvalue1());
-      }
-      
-      if (isServer){
-	
-	
-	printf("what is up %s\n",gotvalue());
       }    
       }
   else{
