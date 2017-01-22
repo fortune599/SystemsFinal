@@ -224,7 +224,7 @@ int main(){
       if (isServer){
 	sendclient(c1);
 	serve();
-	printf(gotvalue());
+	printf("what is up %s",gotvalue());
       }    
       else if(!isServer){
 	sendserv(c1);
