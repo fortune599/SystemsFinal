@@ -52,17 +52,17 @@ int serve() {
 
   if (doit) { 
     
-    int f = fork();
-    if ( f == 0 ) {
+    //int f = fork();
+    //if ( f == 0 ) {
       
-      close(sd);
+    //close(sd);
       sub_server( connection );
 
-      exit(0);
-    }
-    else {
+      //exit(0);
+      //}
+      //else {
       close( connection );
-    }
+      //}
   }
   return 0;
 }
