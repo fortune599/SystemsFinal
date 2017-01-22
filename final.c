@@ -14,7 +14,6 @@
 #include "networking.h"
 #include "server.c"
 #include "client.c"
-
 struct character{
   char* name;
   int hp;
@@ -34,15 +33,6 @@ struct character party[3];
 
 //test case
 struct character test;
-char  save[1000];
-
-char * getvalue7(){
-  int fd = open( "store.txt", O_RDONLY);
-  read(fd,save,sizeof(save));
-  close(fd);
-  printf("wtf %s", save);
-  return save;
-}
 
 void setValue(int * stat, int newVal){
   *stat = newVal;
@@ -168,7 +158,7 @@ int main(){
   }
 
   if (isServer == 1){
-    //sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
+    sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
     set(1);
     serve();
     sdone();
@@ -179,7 +169,7 @@ int main(){
   args[0]= "client";
   
   if (isServer == 0){
-    //sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
+    sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
     set1(1);
     clien(1,args);
     sdone1();
@@ -233,13 +223,11 @@ int main(){
       if (isServer){
 	sendclient(c1);
 	serve();
-	printf(getvalue7());
       }    
       else if(!isServer){
 	sendserv(c1);
 	clien(1,args);
-	printf(gotvalue1());
-      }    
+      }
       }
   else{
     break;
@@ -284,7 +272,6 @@ int main(){
       if(a[0] == 'd'){
 	playerd ++; // implement further
       }
-
       // glitch sometimes no action is taken
       enemyd = 0;
       if(ai == 0){

@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -52,15 +52,19 @@ int clien( int argc, char *argv[] ) {
   strncpy(buffer,get1,MESSAGE_BUFFER_SIZE);
   
   if (doit1) {
+    //printf("enter message: ");
+    //fgets( buffer, sizeof(buffer), stdin );
+    //char *p = strchr(buffer, '\n');
+    //*p = 0;
+  
     write( sd, buffer, sizeof(buffer) );
+    read( sd, buffer, sizeof(buffer) );
+    printf( "received: %s\n", buffer );
     read( sd, give1, sizeof(give1) );
-    
-    //printf( "received: %s\n", buffer );
-    // read( sd, give1, sizeof(give1) );
     printf( "give: %s\n", give1 );
     if (sending1){
       write( sd, get1, sizeof(get1) );
-      }
+    }
   }
   
   return 0;
