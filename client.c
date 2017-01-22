@@ -10,6 +10,7 @@ char get1[MESSAGE_BUFFER_SIZE] ;
 char give1[MESSAGE_BUFFER_SIZE];
 int sending1;
 int getting1;
+int done1;
 
 void sendserv(char send[MESSAGE_BUFFER_SIZE]){
   strncpy(get1,send,MESSAGE_BUFFER_SIZE);
@@ -27,6 +28,10 @@ void clientget(int i){
 
 char * gotvalue1(){
   return give1;
+}
+
+void sdone1(){
+  done1 = 1;
 }
 
 int clien( int argc, char *argv[] ) {

@@ -10,7 +10,8 @@ void sub_server( int sd );
 
 int doit = 1;
 int sending;
-int getting; 
+int getting;
+int done; 
 
 char get[MESSAGE_BUFFER_SIZE];
 char give[MESSAGE_BUFFER_SIZE];
@@ -32,21 +33,28 @@ char * gotvalue(){
   return give;
 }
 
+void sdone(){
+  done = 1;
+}
+
+int sd;
 
 int serve() {
-  int sd, connection;
+  int connection;
 
+  
+  if(!done){
   sd = server_setup();
-    
+  }
   
 
-    connection = server_connect( sd );
+  connection = server_connect( sd );
 
-    if (doit) { 
-      
+  if (doit) { 
+    
     int f = fork();
     if ( f == 0 ) {
-
+      
       close(sd);
       sub_server( connection );
 

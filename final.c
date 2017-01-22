@@ -162,6 +162,7 @@ int main(){
     sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
     set(1);
     serve();
+    sdone();
     //set(0);
   }
   char k[100];
@@ -172,6 +173,7 @@ int main(){
     sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
     set1(1);
     clien(1,args);
+    sdone1();
     //set1(0);
   }
 
