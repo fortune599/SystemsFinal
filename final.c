@@ -10,8 +10,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "networking.c"
-#include "networking.h"
 #include "server.c"
 #include "client.c"
 
@@ -169,9 +167,6 @@ int main(){
   args[0]= "client";
   
   if (isServer == 0){
-    printf("Please enter IP address of server you would like to join\n");
-    //fgets(k,sizeof(k),stdin);
-    //args[1] = k;
     //sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
     set1(1);
     clien(1,args);
@@ -219,6 +214,11 @@ int main(){
       }
       printf("we made it here\n");
       initialize(c1,c2,c3);
+
+      if (isServer == 1)
+	sendclient(c1);
+      if (isServer == 0)
+	sendserv(c1);
       
       chosen = 1;
  
