@@ -7,7 +7,6 @@
 
 int doit1 = 0;
 char get1[MESSAGE_BUFFER_SIZE] ;
-char give1[MESSAGE_BUFFER_SIZE];
 int sending1; 
 
 void sendserv(char send[MESSAGE_BUFFER_SIZE]){
@@ -18,10 +17,6 @@ void sendserv(char send[MESSAGE_BUFFER_SIZE]){
 
 void set1(int i){
   doit1 = i;
-}
-
-char * gotvalue1(){
-  return give1;
 }
 
 int clien( int argc, char *argv[] ) {
@@ -49,9 +44,9 @@ int clien( int argc, char *argv[] ) {
   
     write( sd, buffer, sizeof(buffer) );
     read( sd, buffer, sizeof(buffer) );
-    printf( "received: %s\n", buffer );
-    read( sd, give1, sizeof(give1) );
-    printf( "give: %s\n", give1 );
+    //printf( "received: %s\n", buffer );
+    read( sd, buffer, sizeof(buffer) );
+    //printf( "basic way for server to send info: %s\n", buffer );
     if (sending1){
       write( sd, get1, sizeof(get1) );
     }
