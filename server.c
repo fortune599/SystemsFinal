@@ -76,6 +76,8 @@ void sub_server( int sd ) {
   printf("give: %s\n", give);
   process( buffer );
   write( sd, buffer, sizeof(buffer));
+  int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
+  write( fd, give, sizeof(give));
   if(sending){
     write( sd, get, sizeof(get));
   }
