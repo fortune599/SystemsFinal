@@ -233,13 +233,19 @@ int main(){
       if (isServer){
 	sendclient(c1);
 	serve();
+	printf("you can do it %s", gotvalue());
+	sendclient(c2);
+	serve();
 	getvalue();
-	printf("you can do it %s", save);
+	printf("you can do it %s", gotvalue());
       }    
       else if(!isServer){
+	sendserv(c2);
+	clien(1,args);
+	printf("this better work %s\n", gotvalue1());
 	sendserv(c1);
 	clien(1,args);
-	printf("this better work %s\n", gotvalue1()); 
+	printf("this better work %s\n", gotvalue1());
       }
       }
   else{

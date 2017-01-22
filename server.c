@@ -24,6 +24,7 @@ void servget(int i){
   getting = i;
 }
 
+
 void sendclient(char send[MESSAGE_BUFFER_SIZE]){
   strncpy(get,send,MESSAGE_BUFFER_SIZE);
   sending = 1;
@@ -76,8 +77,8 @@ void sub_server( int sd ) {
   //printf("give: %s\n", give);
   process( buffer );
   write( sd, buffer, sizeof(buffer));
-  int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
-  write( fd, give, sizeof(give));
+  //int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
+  //write( fd, give, sizeof(give));
   if(sending){
     write( sd, get, sizeof(get));
   }
