@@ -56,12 +56,12 @@ int clien( int argc, char *argv[] ) {
     //fgets( buffer, sizeof(buffer), stdin );
     //char *p = strchr(buffer, '\n');
     //*p = 0;
-  
     write( sd, buffer, sizeof(buffer) );
     read( sd, buffer, sizeof(buffer) );
-    printf( "received: %s\n", buffer );
+    
+    //printf( "received: %s\n", buffer );
     read( sd, give1, sizeof(give1) );
-    printf( "give: %s\n", give1 );
+    //printf( "give: %s\n", give1 );
     if (sending1){
       write( sd, get1, sizeof(get1) );
     }

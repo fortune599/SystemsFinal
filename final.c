@@ -224,10 +224,12 @@ int main(){
       if (isServer){
 	sendclient(c1);
 	serve();
+	printf(gotvalue());
       }    
       else if(!isServer){
 	sendserv(c1);
 	clien(1,args);
+	printf(gotvalue1());
       }
       }
   else{
