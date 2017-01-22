@@ -10,12 +10,17 @@ void sub_server( int sd );
 
 int doit = 1;
 int sending;
+int getting; 
 
 char get[MESSAGE_BUFFER_SIZE];
 char give[MESSAGE_BUFFER_SIZE];
 
 void set(int i){
   doit = i;
+}
+
+void servget(int i){
+  getting = i;
 }
 
 void sendclient(char send[MESSAGE_BUFFER_SIZE]){
@@ -59,7 +64,6 @@ void sub_server( int sd ) {
   //printf("silly");
   char buffer[MESSAGE_BUFFER_SIZE];
   while (read( sd, buffer, sizeof(buffer) )) {
-
     strcpy(give,buffer);
     printf("give: %s\n", give);
     process( buffer );

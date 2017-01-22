@@ -8,7 +8,8 @@
 int doit1 = 0;
 char get1[MESSAGE_BUFFER_SIZE] ;
 char give1[MESSAGE_BUFFER_SIZE];
-int sending1; 
+int sending1;
+int getting1;
 
 void sendserv(char send[MESSAGE_BUFFER_SIZE]){
   strncpy(get1,send,MESSAGE_BUFFER_SIZE);
@@ -18,6 +19,10 @@ void sendserv(char send[MESSAGE_BUFFER_SIZE]){
 
 void set1(int i){
   doit1 = i;
+}
+
+void clientget(int i){
+  getting1 = i;
 }
 
 char * gotvalue1(){
