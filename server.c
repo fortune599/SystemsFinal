@@ -63,17 +63,17 @@ int serve() {
 void sub_server( int sd ) {
   //printf("silly");
   char buffer[MESSAGE_BUFFER_SIZE];
-  while (read( sd, buffer, sizeof(buffer) )) {
-    strcpy(give,buffer);
-    printf("give: %s\n", give);
-    process( buffer );
-    write( sd, buffer, sizeof(buffer));
-    if(sending){
-      write( sd, get, sizeof(get));
-    }
+  read( sd, buffer, sizeof(buffer) );
+  strcpy(give,buffer);
+  printf("give: %s\n", give);
+  process( buffer );
+  write( sd, buffer, sizeof(buffer));
+  if(sending){
+    write( sd, get, sizeof(get));
   }
-  
 }
+  
+
 void process( char * s ) {
 
   while ( *s ) {

@@ -219,11 +219,14 @@ int main(){
       
       chosen = 1;
 
-      if (isServer)
+      if (isServer){
 	sendclient(c1);
-      else if(!isServer)
+	serve();
+      }    
+      else if(!isServer){
 	sendserv(c1);
- 
+	clien(1,args);
+      }
       }
   else{
     break;
