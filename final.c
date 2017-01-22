@@ -40,7 +40,7 @@ void getvalue(){
   int fd = open( "store.txt", O_RDONLY);
   read(fd,save,sizeof(save));
   close(fd);
-  printf("wtf %s\n", save);
+  //printf("wtf %s\n", save);
 }
 
 

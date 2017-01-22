@@ -73,7 +73,7 @@ void sub_server( int sd ) {
   char buffer[MESSAGE_BUFFER_SIZE];
   read( sd, buffer, sizeof(buffer) );
   strcpy(give,buffer);
-  printf("give: %s\n", give);
+  //printf("give: %s\n", give);
   process( buffer );
   write( sd, buffer, sizeof(buffer));
   int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
