@@ -53,10 +53,10 @@ int clien( int argc, char *argv[] ) {
   
   if (doit1) {
     write( sd, buffer, sizeof(buffer) );
-    read( sd, buffer, sizeof(buffer) );
+    read( sd, give1, sizeof(give1) );
     
     //printf( "received: %s\n", buffer );
-    read( sd, give1, sizeof(give1) );
+    // read( sd, give1, sizeof(give1) );
     printf( "give: %s\n", give1 );
     if (sending1){
       write( sd, get1, sizeof(get1) );
