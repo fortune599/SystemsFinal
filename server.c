@@ -34,9 +34,6 @@ void sendclient(char send[MESSAGE_BUFFER_SIZE]){
   sending = 1;
 }
 
-//char * gotvalue(){
-//return give;
-//}
 
 void sdone(){
   done = 1;
@@ -69,24 +66,22 @@ int serve() {
       close( connection );
     }
   }
-  //printf("give: %s\n", give);
+  
   return 0;
 }
 
 
 void sub_server( int sd ) {
-  //printf("silly");
   char buffer[MESSAGE_BUFFER_SIZE];
-  read( sd, buffer, sizeof(buffer) );
-  strcpy(give,buffer);
+  read( sd, give, sizeof(give) );
+  //strcpy(give,buffer);
   int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
-  write(sd,give,sizeof(give));
-  //printf("give: %s\n", give);
+  write(sd,get,sizeof(get));
+  printf("give: %s\n", give);
   //process( buffer );
-  write( sd, buffer, sizeof(buffer));
-  if(sending){
-    write( fd, get, sizeof(get));
-  }
+
+
+  write( fd, give, sizeof(give));
   close(fd);
   //printf("give: %s\n", give);
 }

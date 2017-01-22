@@ -168,7 +168,7 @@ int main(){
   }
 
   if (isServer == 1){
-    sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
+    //sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
     set(1);
     serve();
     sdone();
@@ -179,7 +179,7 @@ int main(){
   args[0]= "client";
   
   if (isServer == 0){
-    sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
+    //sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
     set1(1);
     clien(1,args);
     sdone1();
