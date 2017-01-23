@@ -108,6 +108,15 @@ void copystruct(struct character *s1, struct character *s2){
   //printf("%s %s\n", s1.name, s2.name);
 }
 
+int myCharacter(char * name){
+  int i;
+  for(i = 0; i < 3; i++){
+    if ( strstr( party[i].name, name ) != NULL)
+      return 1;
+  }
+  return 0;
+}
+
 void initialize(char * c1, char * c2, char *c3, struct character array[], struct character a, struct character b, struct character c){  
   char ** gogojuice = (char **)malloc(sizeof(char*));
   char ** daddy = (char **)malloc(sizeof(char*));
@@ -322,16 +331,52 @@ int main(){
 	//game itself begins here
 	turn = turn % 6;
 	copystruct(&attacker, &everyone[turn]);
-
-	printf("\nSELECT %s's ACTION:\n", attacker.name);
-	printf("Attack | Ability | Defend | Concede\n");
-	fgets(commands, sizeof(commands), stdin);
-	commands[strcspn(commands, "\n")] = 0;
-	if ( strstr(commands, "Concede") != NULL )
-	  myHP = 0;
-
+	
+	if (!isServer){
+	  if (myCharacter(attacker.name)){
+	    if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
+	      if ( strstr( gotvalue1(), "enHP 0" ) != NULL){
+		enHP = 0;
+	      }
+	    }//if the next character has the same name
+	    else{//insert actions here
+	      printf("\nSELECT %s's ACTION:\n", attacker.name);
+	      printf("Attack | Ability | Defend | Concede\n");
+	      fgets(commands, sizeof(commands), stdin);
+	      commands[strcspn(commands, "\n")] = 0;
+	      if ( strstr(commands, "Concede") != NULL ){
+		sendserv("enHP 0");
+		clien(1, args);
+		myHP = 0;
+	      }
+	    }
+	  }//if it's the client's character
+	  else{//response here
+	    if ( strstr( gotvalue1(), "enHP 0" ) != NULL){
+	      enHP = 0;
+	    }
+	  }
+	}//if it's the client
+	else{
+	  if (myCharacter(attacker.name)){//insert actions here
+	    printf("\nSELECT %s's ACTION:\n", attacker.name);
+	    printf("Attack | Ability | Defend | Concede\n");
+	    fgets(commands, sizeof(commands), stdin);
+	    commands[strcspn(commands, "\n")] = 0;
+	    if ( strstr(commands, "Concede") != NULL ){
+	      sendclient("enHP 0");
+	      serve();
+	      myHP = 0;
+	    }
+	  }//if it's the server's character
+	  else{//response here
+	    if ( strstr( gotvalue(), "enHP 0" ) != NULL){
+	      enHP = 0;
+	    }
+	  }
+	}//if it's the server
 	turn++;
-      }
+      }//end HP while loop
       if (myHP > 0){
 	printf("YOU WIN\n");
 	break;
@@ -341,78 +386,6 @@ int main(){
 	break;
       }
     }
-    /*int ai = randint() % 3;
-      if(!enemy){
-      printf("you win\n");
-      return 0;
-      }
-      if(!player){
-	printf("you lose\n");
-	return 0;
-      }
-      char a[256];
-      printf("Enemy health is: %d\n", enemy);
-      //printf("Your health is: %d\n", player); 
-      printf("Enter a to attack, enter s to cast spell, enter d to defend\n");
-      fgets(a,sizeof(a),stdin);
-      playerd = 0;
-      if(a[0] == 'a'){
-	printf("Which enemy?\n"); //gonna have an array of enemies to select who to attack
-      
-	if(enemyd == 1){
-	  printf("enemy defends attack\n");
-	  //at this point only gordon is attack for test purposes
-	  // also the 10 is relative at this point
-	  damage(man1.atk, test.def + 10, test.hp);
-	}
-	else{
-	  damage(man1.atk, test.def, test.hp);
-	}
-      }
-      // we cant do magic attacks until we get the different spells we are going to use
-      if(a[0] == 's'){
-	if(enemyd == 1){
-	  printf("enemy defends spell\n");
-	}
-	else{
-	  enemy --;
-	}
-      }
-      if(a[0] == 'd'){
-	playerd ++; // implement further
-      }
-      // glitch sometimes no action is taken
-      enemyd = 0;
-      if(ai == 0){
-	if(playerd == 1){
-	  //should randomly select an enemy
-	  printf("You defended enemy attack\n");
-	  damage(test.atk, man1.def + 10, man1.hp);	
-	}
-	else{
-	  printf("Enemy attacks\n");
-	  damage(test.atk, man2.def + 10, man1.hp);
-	}
-      }
-      if(ai == 1){
-	if(playerd == 1){
-	  printf("You defended enemy spell\n");
-	}
-	else{
-	  printf("Enemy casts spell\n");
-	  player --;
-	}
-      }
-      if(ai == 2){
-	printf("Enemy defends\n");
-	enemyd ++;// implement further 
-      }
-    
-    
-      printf("------------------\n");
-  
-    
-      }*/
   }
   return 0;
 }
