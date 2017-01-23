@@ -48,8 +48,9 @@ int serve() {
   sd = server_setup();
   }
   
-
+  //printf("before server_connect\n");
   connection = server_connect( sd );
+  //printf("after server_connect\n");
 
   if (doit) { 
     

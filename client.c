@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -38,7 +38,7 @@ int clien( int argc, char *argv[] ) {
 
   char *host;
   if (argc != 2 ) {
-    printf("host not specified, conneting to 127.0.0.1\n");
+    printf("host not specified, connecting to 127.0.0.1\n");
     host = "127.0.0.1";
   }
   else
@@ -46,7 +46,9 @@ int clien( int argc, char *argv[] ) {
   
   int sd;
 
+  //printf("before client_connect\n");
   sd = client_connect( host );
+  //printf("after client_connect\n");
 
   char buffer[MESSAGE_BUFFER_SIZE];
   strncpy(buffer,get1,MESSAGE_BUFFER_SIZE);

@@ -338,7 +338,7 @@ int main(){
 	    if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
 	      printf("the client gets next turn: (n)%s (c)%s\n", everyone[(turn + 1) % 6].name, attacker.name);
 	      sendserv("wasted space");
-	      clien(1, args);
+	      clien(1, args);//hangs up here
 	      if ( strstr( gotvalue1(), "enHP 0" ) != NULL){
 		enHP = 0;
 	      }
@@ -382,7 +382,7 @@ int main(){
               commands[strcspn(commands, "\n")] = 0;
               if ( strstr(commands, "Concede") != NULL ){
                 printf("sending concession\n");
-                sendclient("enHP 0");
+                sendclient("enHP 0");//hangs up here
                 serve();
                 myHP = 0;
               }
