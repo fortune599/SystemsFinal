@@ -354,6 +354,10 @@ int main(){
 		clien(1, args);
 		myHP = 0;
 	      }
+	      else{
+		sendserv("wasted space");
+		clien(1, args);
+	      }
 	    }
 	  }//if it's the client's character
 	  else{//response here
@@ -386,6 +390,10 @@ int main(){
                 serve();
                 myHP = 0;
               }
+	      else{
+		sendclient("wasted space");
+		serve();
+	      }
 	    }
 	  }//if it's the server's character
 	  else{//response here

@@ -38,7 +38,7 @@ int clien( int argc, char *argv[] ) {
 
   char *host;
   if (argc != 2 ) {
-    printf("host not specified, connecting to 127.0.0.1\n");
+    //printf("host not specified, connecting to 127.0.0.1\n");
     host = "127.0.0.1";
   }
   else
