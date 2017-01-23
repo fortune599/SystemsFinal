@@ -209,6 +209,7 @@ int main(){
 
       int k = 0;
       while (k < 3){
+	strcpy(class, "antidisestablishmentarianism");
 	if (k == 0)
 	  printf("\nChoose your first character. Type the name:\n");
 	if (k == 1)
@@ -245,7 +246,6 @@ int main(){
 	k++;
 	
 	printf("%s selected.\n", class);
-	strcpy(class, "antidisestablishmentarianism");
       }
       //printf("we made it here\n");
       initialize(c1,c2,c3,party,man1,man2,man3);
