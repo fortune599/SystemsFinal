@@ -14,6 +14,7 @@
 #include "networking.h"
 #include "server.c"
 #include "client.c"
+
 struct character{
   char* name;
   int hp;
@@ -29,7 +30,12 @@ struct character man1;
 struct character man2;
 struct character man3;
 
+struct character en1;
+struct character en2;
+struct character en3;
+
 struct character party[3];
+struct character opponent[3];
 
 //test case
 struct character test;
@@ -101,7 +107,7 @@ void copystruct(struct character *s1, struct character *s2){
   s1 -> initv = s2 -> initv;
 }
 
-void initialize(char * c1, char * c2, char *c3) {  
+void initialize(char * c1, char * c2, char *c3, struct character array[], struct character a, struct character b, struct character c){  
   char ** gogojuice = (char **)malloc(sizeof(char*));
   char ** daddy = (char **)malloc(sizeof(char*));
 
@@ -123,7 +129,7 @@ void initialize(char * c1, char * c2, char *c3) {
     daddy[i] = strsep(&s, "\n");
     i++;
   }
-  printf("test1\n");
+  //printf("test1\n");
   int x = 0;
   int z = 0;
 
@@ -131,20 +137,21 @@ void initialize(char * c1, char * c2, char *c3) {
   
   for ( x; x < i - 1; x++ ){
     if (strstr(daddy[x],c1) != NULL){
-      printf("%s\n", daddy[x]);
-      addToStruct( &man1, daddy[x] );
+      //printf("%s\n", daddy[x]);
+      addToStruct( &a, daddy[x] );
+      array[z] = a;
       z++;
     }
     else if (strstr(daddy[x],c2) != NULL){
-      printf("%s\n", daddy[x]);
-      addToStruct( &man2, daddy[x] );
-      party[z] = man2;
+      //printf("%s\n", daddy[x]);
+      addToStruct( &b, daddy[x] );
+      array[z] = b;
       z++;
     }
     else if (strstr(daddy[x],c3) != NULL){
-      printf("%s\n", daddy[x]);
-      addToStruct( &man2, daddy[x] );
-      party[z] = man3;
+      //printf("%s\n", daddy[x]);
+      addToStruct( &c, daddy[x] );
+      array[z] = c;
       z++;
     }
     //gogojuice[x] = strsep(&daddy[x], ",");
@@ -203,11 +210,11 @@ int main(){
       int k = 0;
       while (k < 3){
 	if (k == 0)
-	  printf("\nChoose Your first character. Type the name\n");
+	  printf("\nChoose your first character. Type the name:\n");
 	if (k == 1)
-	  printf("\nChoose your second character. Type the name\n");
+	  printf("\nChoose your second character. Type the name:\n");
 	if (k == 2)
-	  printf("\nChoose Your third character. Type the name\n");
+	  printf("\nChoose your third character. Type the name:\n");
 	
 	//where we would need to list all the possible people, preety easy
 	printf("Gordon [Bad]\n");
@@ -215,8 +222,20 @@ int main(){
 	printf("Thomas [All-around high stats]\n");
 	if (k == 0)
 	  fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice	
-	fgets(class,sizeof(class),stdin);
-	class[strcspn(class, "\n")] = 0;
+
+	int fd = open( "Players.txt", O_RDONLY );
+	char buff[1024];
+	read( fd, buff, sizeof(buff) );
+	close( fd );
+
+	while ( strstr(buff, class) == NULL ){
+	  printf("\nPlease type name only, exactly as seen:\n> ");
+	  fgets(class,sizeof(class),stdin);
+	  class[strcspn(class, "\n")] = 0;
+	  //printf("%s\n", class);
+	  //printf("%s\n", buff);
+	}
+
 	if (k == 0)
 	  strcpy(c1,class);
 	if (k == 1)
@@ -224,37 +243,50 @@ int main(){
 	if (k == 2)
 	  strcpy(c3,class);
 	k++;
+	
+	printf("%s selected.\n", class);
+	strcpy(class, "antidisestablishmentarianism");
       }
-      printf("we made it here\n");
-      initialize(c1,c2,c3);
+      //printf("we made it here\n");
+      initialize(c1,c2,c3,party,man1,man2,man3);
       
       chosen = 1;
+      char e1[256];
+      char e2[256];
+      char e3[256];
 
       if (isServer){
 	sendclient(c1);
 	serve();
-	printf("you can do it %s", gotvalue());
+	strcpy(e1,gotvalue());
 	sendclient(c2);
 	serve();
-	getvalue();
-	printf("you can do it %s", gotvalue());
-      }    
+	strcpy(e2,gotvalue());
+	sendclient(c3);
+	serve();
+	strcpy(e3,gotvalue());
+	initialize(e1,e2,e3,opponent,en1,en2,en3);
+      }
       else if(!isServer){
-	sendserv(c2);
-	clien(1,args);
-	printf("this better work %s\n", gotvalue1());
 	sendserv(c1);
 	clien(1,args);
-	printf("this better work %s\n", gotvalue1());
+	strcpy(e1,gotvalue1());
+	sendserv(c2);
+	clien(1,args);
+	strcpy(e2,gotvalue1());
+	sendserv(c3);
+	clien(1,args);
+	strcpy(e3,gotvalue1());
+	initialize(e1,e2,e3,opponent,en1,en2,en3);
       }
-      }
-  else{
-    break;
-  }
-      /*int ai = randint() % 3;
+    }
+    else{
+      break;
+    }
+    /*int ai = randint() % 3;
       if(!enemy){
-	printf("you win\n");
-	return 0;
+      printf("you win\n");
+      return 0;
       }
       if(!player){
 	printf("you lose\n");
