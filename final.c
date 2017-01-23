@@ -302,7 +302,7 @@ int main(){
       int mymax = 0;
       int enmax = 0;
       int curse2;
-      for (curse = 0; curse < 6; curse++){
+      for (curse = 0; curse < 6; curse++){//sorting by initiative
 	for (curse2 = 0; curse2 < 3; curse2++){
 	  if (party[curse2].initv > party[mymax].initv)
 	    mymax = curse2;
@@ -317,7 +317,7 @@ int main(){
 	}
 	else{
 	  copystruct(&everyone[curse], &opponent[enmax]);
-	  opponent[enmax].initv = -1;
+	  opponent[enmax].initv = -1;//sorry buddy
 	}
       }
 
