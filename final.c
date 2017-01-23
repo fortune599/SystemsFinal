@@ -14,6 +14,7 @@
 #include "networking.h"
 #include "server.c"
 #include "client.c"
+#include "character.c"
 
 struct character{
   char* name;
@@ -206,13 +207,12 @@ int main(){
       char c1[256];
       char c2[256];
       char c3[256];
-      char class[266];
+      char class[266] = "";
       char class2[266];
       printf("Welcome\n");
 
       int k = 0;
       while (k < 3){
-	strcpy(class, "antidisestablishmentarianism");
 	if (k == 0)
 	  printf("\nChoose your first character. Type the name:\n");
 	if (k == 1)
@@ -221,9 +221,7 @@ int main(){
 	  printf("\nChoose your third character. Type the name:\n");
 	
 	//where we would need to list all the possible people, preety easy
-	printf("Gordon [Bad]\n");
-	printf("Percy [Decent stats]\n");
-	printf("Thomas [All-around high stats]\n");
+	printCharac(class2,class);
 	if (k == 0)
 	  fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice
 
@@ -231,6 +229,9 @@ int main(){
 	char buff[1024];
 	read( fd, buff, sizeof(buff) );
 	close( fd );
+
+	strcpy(class2, class);
+	strcpy(class, "antidisestablishmentarianism");
 
 	while ( strstr(buff, class) == NULL ){
 	  printf("\nPlease type name only, exactly as seen:\n> ");
