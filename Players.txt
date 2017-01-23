@@ -1,4 +1,3 @@
-name   hp   ap  atk   def  matk  mdef initv
 DonWalf,1,1,1,1,1,1,1
 Suwamik,1,1,1,1,1,1,2
 Fortune,1,1,1,1,1,1,3
