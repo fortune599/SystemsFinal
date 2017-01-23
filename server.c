@@ -76,20 +76,10 @@ void sub_server( int sd ) {
   read( sd, buffer, sizeof(buffer) );
   strcpy(give,buffer);
   //printf("give: %s\n", give);
-  process( buffer );
   write( sd, buffer, sizeof(buffer));
   //int fd = open( "store.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644 );
   //write( fd, give, sizeof(give));
   if(sending){
     write( sd, get, sizeof(get));
-  }
-}
-  
-
-void process( char * s ) {
-
-  while ( *s ) {
-    *s = (*s - 'a' + 13) % 26 + 'a';
-    s++;
   }
 }
