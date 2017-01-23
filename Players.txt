@@ -1,3 +1,18 @@
-Gordon,1,1,1,1,1,1,1
-Percy,2,2,2,2,2,2,2
-Thomas,3,3,3,3,3,3,3
+name   hp   ap  atk   def  matk  mdef initv
+DonWalf,1,1,1,1,1,1,1
+Suwamik,1,1,1,1,1,1,1
+Fortune,1,1,1,1,1,1,1
+Jackson,1,1,1,1,1,1,1
+Kart Mario,1,1,1,1,1,1,1
+Goku,1,1,1,1,1,1,1
+Zelda,1,1,1,1,1,1,1
+Samus,1,1,1,1,1,1,1
+Flash,1,1,1,1,1,1,1
+Beelzebub,1,1,1,1,1,1,1
+Starman,1,1,1,1,1,1,1
+BoJack Horseman,1,1,1,1,1,1,1
+Darth Daddy,1,1,1,1,1,1,1
+Donald Drumpf,1,1,1,1,1,1,1
+Bill Nye the Science Guy,1,1,1,1,1,1,1
+Honey Boo Boo,1,1,1,1,1,1,1
+Gogiga Gagagigo,1,1,1,1,1,1,1
