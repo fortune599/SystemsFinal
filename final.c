@@ -97,14 +97,15 @@ void addToStruct( struct character *dude, char *stuff ){
 }
 
 void copystruct(struct character *s1, struct character *s2){
-  s1 -> name = s2 -> name;
-  s1 -> hp = s2 -> hp;
-  s1 -> ap = s2 -> ap;
-  s1 -> atk = s2 -> atk;
-  s1 -> def = s2 -> def;
-  s1 -> matk = s2 ->matk;
-  s1 -> mdef = s2 ->mdef;
-  s1 -> initv = s2 -> initv;
+  s1->name = s2->name;
+  s1->hp = s2->hp;
+  s1->ap = s2->ap;
+  s1->atk = s2->atk;
+  s1->def = s2->def;
+  s1->matk = s2->matk;
+  s1->mdef = s2->mdef;
+  s1->initv = s2->initv;
+  //printf("%s %s\n", s1.name, s2.name);
 }
 
 void initialize(char * c1, char * c2, char *c3, struct character array[], struct character a, struct character b, struct character c){  
@@ -222,7 +223,7 @@ int main(){
 	printf("Percy [Decent stats]\n");
 	printf("Thomas [All-around high stats]\n");
 	if (k == 0)
-	  fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice	
+	  fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice
 
 	int fd = open( "Players.txt", O_RDONLY );
 	char buff[1024];
@@ -281,7 +282,64 @@ int main(){
       }
     }
     else{
-      break;
+      int myHP = 1;
+      int enHP = 1;
+      int curse;
+      int turn = 0;
+      struct character attacker;
+      char commands[256];
+
+      struct character everyone[6];
+      int mymax = 0;
+      int enmax = 0;
+      int curse2;
+      for (curse = 0; curse < 6; curse++){
+	for (curse2 = 0; curse2 < 3; curse2++){
+	  if (party[curse2].initv > party[mymax].initv)
+	    mymax = curse2;
+	}
+	for (curse2 = 0; curse2 < 3; curse2++){
+	  if (opponent[curse2].initv > opponent[enmax].initv)
+	    enmax = curse2;
+	}
+	if (party[mymax].initv > opponent[enmax].initv){
+	  copystruct(&everyone[curse], &party[mymax]);
+	  party[mymax].initv = -1;
+	}
+	else{
+	  copystruct(&everyone[curse], &opponent[enmax]);
+	  opponent[enmax].initv = -1;
+	}
+      }
+
+      while (myHP > 0 && enHP > 0){
+	for(curse = 0; curse < 3; curse++){
+	  myHP += party[curse].hp;
+	}
+	for(curse = 0; curse < 3; curse++){
+	  enHP += opponent[curse].hp;
+	}
+	//game itself begins here
+	turn = turn % 6;
+	copystruct(&attacker, &everyone[turn]);
+
+	printf("\nSELECT %s's ACTION:\n", attacker.name);
+	printf("Attack | Ability | Defend | Concede\n");
+	fgets(commands, sizeof(commands), stdin);
+	commands[strcspn(commands, "\n")] = 0;
+	if ( strstr(commands, "Concede") != NULL )
+	  myHP = 0;
+
+	turn++;
+      }
+      if (myHP > 0){
+	printf("YOU WIN\n");
+	break;
+      }
+      else{
+	printf("OPPONENT WON\n");
+	break;
+      }
     }
     /*int ai = randint() % 3;
       if(!enemy){
