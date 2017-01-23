@@ -332,9 +332,13 @@ int main(){
 	turn = turn % 6;
 	copystruct(&attacker, &everyone[turn]);
 	
-	if (!isServer){
+	if (!isServer){//DELETE DIAGNOSTIC PRINTFS LATER
 	  if (myCharacter(attacker.name)){
+	    printf("this is a client character\n");
 	    if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
+	      printf("the client gets next turn: (n)%s (c)%s\n", everyone[(turn + 1) % 6].name, attacker.name);
+	      sendserv("wasted space");
+	      clien(1, args);
 	      if ( strstr( gotvalue1(), "enHP 0" ) != NULL){
 		enHP = 0;
 	      }
@@ -345,6 +349,7 @@ int main(){
 	      fgets(commands, sizeof(commands), stdin);
 	      commands[strcspn(commands, "\n")] = 0;
 	      if ( strstr(commands, "Concede") != NULL ){
+		printf("sending concession");
 		sendserv("enHP 0");
 		clien(1, args);
 		myHP = 0;
@@ -352,24 +357,41 @@ int main(){
 	    }
 	  }//if it's the client's character
 	  else{//response here
+	    printf("this is not your character, client\n");
+	    sendserv("wasted space");
+	    clien(1, args);
 	    if ( strstr( gotvalue1(), "enHP 0" ) != NULL){
 	      enHP = 0;
 	    }
 	  }
 	}//if it's the client
 	else{
-	  if (myCharacter(attacker.name)){//insert actions here
-	    printf("\nSELECT %s's ACTION:\n", attacker.name);
-	    printf("Attack | Ability | Defend | Concede\n");
-	    fgets(commands, sizeof(commands), stdin);
-	    commands[strcspn(commands, "\n")] = 0;
-	    if ( strstr(commands, "Concede") != NULL ){
-	      sendclient("enHP 0");
+	  if (myCharacter(attacker.name)){
+	    if ( strstr( everyone[(turn + 5) % 6].name, attacker.name ) != NULL ){//response here
+	      printf("the server got last turn: (n)%s (c)%s\n", everyone[(turn + 5) % 6].name, attacker.name);
+	      sendclient("wasted space");
 	      serve();
-	      myHP = 0;
+	      if ( strstr( gotvalue(), "enHP 0" ) != NULL){
+		enHP = 0;
+	      }
+	    }//if the previous character has the same name
+	    else{//insert actions here
+	      printf("\nSELECT %s's ACTION:\n", attacker.name);
+              printf("Attack | Ability | Defend | Concede\n");
+              fgets(commands, sizeof(commands), stdin);
+              commands[strcspn(commands, "\n")] = 0;
+              if ( strstr(commands, "Concede") != NULL ){
+                printf("sending concession\n");
+                sendclient("enHP 0");
+                serve();
+                myHP = 0;
+              }
 	    }
 	  }//if it's the server's character
 	  else{//response here
+	    printf("this is not your character, server\n");
+	    sendclient("wasted space");
+	    serve();
 	    if ( strstr( gotvalue(), "enHP 0" ) != NULL){
 	      enHP = 0;
 	    }
