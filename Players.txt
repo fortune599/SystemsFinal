@@ -1,18 +1,18 @@
 name   hp   ap  atk   def  matk  mdef initv
 DonWalf,1,1,1,1,1,1,1
-Suwamik,1,1,1,1,1,1,1
-Fortune,1,1,1,1,1,1,1
-Jackson,1,1,1,1,1,1,1
-Kart Mario,1,1,1,1,1,1,1
-Goku,1,1,1,1,1,1,1
-Zelda,1,1,1,1,1,1,1
-Samus,1,1,1,1,1,1,1
-Flash,1,1,1,1,1,1,1
-Beelzebub,1,1,1,1,1,1,1
-Starman,1,1,1,1,1,1,1
-BoJack Horseman,1,1,1,1,1,1,1
-Darth Daddy,1,1,1,1,1,1,1
-Donald Drumpf,1,1,1,1,1,1,1
-Bill Nye the Science Guy,1,1,1,1,1,1,1
-Honey Boo Boo,1,1,1,1,1,1,1
-Gogiga Gagagigo,1,1,1,1,1,1,1
+Suwamik,1,1,1,1,1,1,2
+Fortune,1,1,1,1,1,1,3
+Jackson,1,1,1,1,1,1,4
+Kart Mario,1,1,1,1,1,1,5
+Goku,1,1,1,1,1,1,6
+Zelda,1,1,1,1,1,1,7
+Samus,1,1,1,1,1,1,8
+Flash,1,1,1,1,1,1,9
+Beelzebub,1,1,1,1,1,1,10
+Starman,1,1,1,1,1,1,11
+BoJack Horseman,1,1,1,1,1,1,12
+Darth Daddy,1,1,1,1,1,1,13
+Donald Drumpf,1,1,1,1,1,1,14
+Bill Nye the Science Guy,1,1,1,1,1,1,15
+Honey Boo Boo,1,1,1,1,1,1,16
+Gogiga Gagagigo,1,1,1,1,1,1,17
