@@ -128,44 +128,41 @@ void initialize(char * c1, char * c2, char *c3, struct character array[], struct
   char buff[1024];
   read( fd, buff, sizeof(buff) );
   close( fd );
-  //printf("%s\n", buff);
   
   int i = 0;
   
   char * s = buff;
-  //printf("hi\n");
   
   while( s ){
     daddy[i] = strsep(&s, "\n");
     i++;
   }
-  //printf("test1\n");
+
   int x = 0;
   int z = 0;
-
-  //printf("%s\n",strstr(daddy[1],"Gordon"));
-  
+ 
   for ( x; x < i - 1; x++ ){
     if (strstr(daddy[x],c1) != NULL){
-      //printf("%s\n", daddy[x]);
+      //      printf("%s\n", daddy[x]);
       addToStruct( &a, daddy[x] );
+      //      printf("%s\n", a.name);
       array[z] = a;
       z++;
     }
     else if (strstr(daddy[x],c2) != NULL){
-      //printf("%s\n", daddy[x]);
+      //      printf("%s\n", daddy[x]);
       addToStruct( &b, daddy[x] );
+      //      printf("%s\n", b.name);
       array[z] = b;
       z++;
     }
     else if (strstr(daddy[x],c3) != NULL){
-      //printf("%s\n", daddy[x]);
+      //      printf("%s\n", daddy[x]);
       addToStruct( &c, daddy[x] );
+      //      printf("%s\n", c.name);
       array[z] = c;
       z++;
     }
-    //gogojuice[x] = strsep(&daddy[x], ",");
-    //printf("%s\n", gogojuice[x]);
   }
 }
 
@@ -202,9 +199,6 @@ int main(){
     sdone1();
     //set1(0);
   }
-
-  char t[] = "Edward,5,5,5,5,5,5,5";
-  addToStruct(&test,t);
 
   int chosen = 0;
   
