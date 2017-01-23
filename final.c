@@ -117,8 +117,7 @@ int myCharacter(char * name){
   return 0;
 }
 
-void initialize(char * c1, char * c2, char *c3, struct character array[], struct character a, struct character b, struct character c){  
-  char ** gogojuice = (char **)malloc(sizeof(char*));
+void initialize(char * c1, char * c2, char *c3, struct character array[], struct character a, struct character b, struct character c){
   char ** daddy = (char **)malloc(sizeof(char*));
 
   printf("c1: %s\n",c1);
@@ -143,9 +142,9 @@ void initialize(char * c1, char * c2, char *c3, struct character array[], struct
  
   for ( x; x < i - 1; x++ ){
     if (strstr(daddy[x],c1) != NULL){
-      //      printf("%s\n", daddy[x]);
+      printf("%s\n", daddy[x]);
       addToStruct( &a, daddy[x] );
-      //      printf("%s\n", a.name);
+      printf("%s\n", a.name);
       array[z] = a;
       z++;
     }
@@ -302,6 +301,7 @@ int main(){
 	    mymax = curse2;
 	}
 	for (curse2 = 0; curse2 < 3; curse2++){
+	  //printf("%d initiative testing\n", opponent[curse2].initv);
 	  if (opponent[curse2].initv > opponent[enmax].initv)
 	    enmax = curse2;
 	}
@@ -313,6 +313,7 @@ int main(){
 	  copystruct(&everyone[curse], &opponent[enmax]);
 	  opponent[enmax].initv = -1;//sorry buddy
 	}
+	printf("%s  %d initiative testing\n", everyone[curse].name, everyone[curse].initv);
       }
 
       while (myHP > 0 && enHP > 0){
@@ -325,7 +326,7 @@ int main(){
 	//game itself begins here
 	turn = turn % 6;
 	copystruct(&attacker, &everyone[turn]);
-	
+
 	if (!isServer){//DELETE DIAGNOSTIC PRINTFS LATER
 	  if (myCharacter(attacker.name)){
 	    printf("this is a client character\n");
@@ -347,10 +348,6 @@ int main(){
 		sendserv("enHP 0");
 		clien(1, args);
 		myHP = 0;
-	      }
-	      else{
-		sendserv("wasted space");
-		clien(1, args);
 	      }
 	    }
 	  }//if it's the client's character
@@ -384,10 +381,6 @@ int main(){
                 serve();
                 myHP = 0;
               }
-	      else{
-		sendclient("wasted space");
-		serve();
-	      }
 	    }
 	  }//if it's the server's character
 	  else{//response here
