@@ -1,0 +1,96 @@
+Members: Jackson, Suwamik, Fortune
+
+January 4, 2017
+	Fortune:
+		-Makes Repo
+		-Creates DESIGN.txt (collaboration) 
+		-Initial Push 
+
+January 9, 2017
+	Jackson:
+		-Create basic version of game which includes attack and magic
+		-Uses fgets to take input from player
+		-Implements a basic A.I. that works by generating a random number and deciding moves based off of it
+		-Made functionality that allows game to end when enemy or A.I. health reaches 0
+
+January 10, 2017
+	Jackson:
+		-Added the ability for the player and ai to defend against attacks 
+
+January 11, 2017
+	Team Effort: 
+		-Created a stuct for the character which contains important and specific information which can allow 			for class creation.
+
+January 13, 2017
+	Suwamik (with help from rest of the team):
+		-Create function which lets you set values of the struct
+		-create functions that calculate based off given stats, the damage done for regular and magic attacks
+		-Created and formatted Players.txt
+
+January 17, 2017
+	Suwamik (with team help):
+		-Started work on function to read from Players.txt and fill structs in final.c 
+
+January 18, 2017
+	Jackson:
+		-Made progress on, but ultimately failed to get Jan 17 function working
+	Fortune:
+		-Made add to struct function
+		-Improved initialize function
+	Suwamik:
+		-General improvements 
+		-General breakage of code
+		-Reworked game code so it is less functional but easier to build upon
+
+January 19, 2017
+	Suwamik:
+		-Added networking file template to repo
+		-Confirmed that this code was working (not functional for our purposes)
+	Jackson:
+		-Added some basic networking code to Final.c (not functional yet for our purposes)
+		-Worked on getting character selection to work 
+		-Started to lay groundwork for customized networking code
+
+January 20, 2017
+	Jackson:
+		-Worked on networking
+		-Made it so that client and server were sending and receiving messages without preventing the user 			from playing the game
+
+January 21, 2017
+	Jackson: 
+		-Added networking functions that allow the sending of messages from client to server and from 			server to client
+		-Changed strings to ints for easier conversion to assist in character selection
+		-Ran into problems with character selection
+
+	Suwamik:
+		-Makes character selection work!!!! Finally! 
+	Fortune:
+		-Updates the makefile
+
+January 22, 2017
+	Jackson:
+		-Made networking work as intended
+		-Server and client can receive sent messages  
+		-Proceeds to break everything 
+		-Fixes networking with even more improvements!
+	Fortune:
+		-Implemented spellcheck 
+		-Made turn order work
+		-Made concession option
+
+January 23, 2017
+	Jackson:
+		-Made addition classes (help from team)
+		-Made DEVLOG
+	Suwamik:
+		-Various changes and additions
+		-Helped fortune
+	Fortune:
+		-Worked on and completed integrating networking and game 
+		-Vital to finishing the project 
+
+
+
+
+
+
