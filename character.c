@@ -132,7 +132,7 @@ void act(int isServer, int *myHP, struct character attacker, struct character op
   char stor[128];
 
   printf("\nSELECT %s's ACTION:\n", attacker.name);
-  printf("Attack | Defend | Concede\n");
+  printf("Concede (try Attack if you want to see failure)\n");
   fgets(commands, sizeof(commands), stdin);
   commands[strcspn(commands, "\n")] = 0;
   if (!isServer){
@@ -160,7 +160,7 @@ void act(int isServer, int *myHP, struct character attacker, struct character op
       }
     }
     else if ( strstr(commands, "Concede") != NULL ){
-      printf("sending concession");
+      //printf("sending concession");
       strcpy(msg, "enHP 0");
       sendserv(msg);
       clien(1, args);
@@ -192,7 +192,7 @@ void act(int isServer, int *myHP, struct character attacker, struct character op
       }
     }
     else if ( strstr(commands, "Concede") != NULL ){
-      printf("sending concession\n");
+      //printf("sending concession\n");
       strcpy(msg, "enHP 0");
       sendclient(msg);//hangs up here
       serve();

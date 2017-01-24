@@ -99,7 +99,7 @@ void copystruct(struct character *s1, struct character *s2){
   //printf("%s %s\n", s1->name, s2->name);
 }
 
-int myCharacter(char * name, struct character  party[]){
+int myCharacter(char * name){
   int i;
   for(i = 0; i < 3; i++){
     if ( strstr( party[i].name, name ) != NULL)
@@ -111,9 +111,9 @@ int myCharacter(char * name, struct character  party[]){
 void initialize(char * c1, char * c2, char *c3, struct character array[], struct character a, struct character b, struct character c){
   char ** daddy = (char **)malloc(sizeof(char*));
 
-  printf("c1: %s\n",c1);
-  printf("c2: %s\n",c2);
-  printf("c3: %s\n",c3);
+  printf("-%s\n",c1);
+  printf("-%s\n",c2);
+  printf("-%s\n",c3);
   int fd = open( "Players.txt", O_RDONLY );
   char buff[1024];
   read( fd, buff, sizeof(buff) );
@@ -273,9 +273,9 @@ int main(){
       }
       initialize(c1,c2,c3,party,man1,man2,man3);
       
-      printf("party member #1: %s\n", party[0].name);
-      printf("party member #2: %s\n", party[1].name);
-      printf("party member #3: %s\n", party[2].name);
+      //printf("party member #1: %s\n", party[0].name);
+      //printf("party member #2: %s\n", party[1].name);
+      //printf("party member #3: %s\n", party[2].name);
     }
     else{
       int myHP = 1;
@@ -320,7 +320,7 @@ int main(){
 	copystruct(&attacker, &everyone[turn]);
 
 	if (!isServer){//DELETE DIAGNOSTIC PRINTFS LATER
-	  if (myCharacter(attacker.name, party)){
+	  if (myCharacter(attacker.name)){
 	    printf("this is a client character\n");
 	    if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
 	      printf("the client gets next turn: (n)%s (c)%s\n", everyone[(turn + 1) % 6].name, attacker.name);
@@ -336,7 +336,7 @@ int main(){
 	  }
 	}//if it's the client
 	else{
-	  if (myCharacter(attacker.name, party)){
+	  if (myCharacter(attacker.name)){
 	    if ( strstr( everyone[(turn + 5) % 6].name, attacker.name ) != NULL ){//response here
 	      printf("the server got last turn: (n)%s (c)%s\n", everyone[(turn + 5) % 6].name, attacker.name);
 	      respond(isServer, &enHP, args);
