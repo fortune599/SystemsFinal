@@ -221,7 +221,7 @@ int main(){
 	  printf("\nChoose your third character. Type the name:\n");
 	
 	//where we would need to list all the possible people, preety easy
-	printCharac(class2,class);
+	printCharac(c1,c2);
 	if (k == 0)
 	  fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice
 
