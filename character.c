@@ -11,6 +11,18 @@
 #include <unistd.h>
 
 void printCharac(char * c1, char * c2){
+
+  char a[256];
+  char b[256];
+  if (!strlen(c1))
+    strcpy(a, "antidisestablishmentarianism");
+  else
+    strcpy(a, c1);
+  if (!strlen(c2))
+    strcpy(b, "antidisestablishmentarianism");
+  else
+    strcpy(b, c2);
+
   char ** daddy = (char **)malloc(sizeof(char*));
   
   int fd = open( "Players.txt", O_RDONLY );
@@ -24,10 +36,14 @@ void printCharac(char * c1, char * c2){
     daddy[i] = strsep(&s, "\n");
     i++;
   }
+  
+  i--;
 
   int x = 0;
   for (x; x < i; x++){
-    if ( (strstr ( daddy[x], c1 ) == NULL) && (strstr ( daddy[x], c2 ) == NULL) )
+    if ( (strstr ( daddy[x], a ) == NULL) && (strstr ( daddy[x], b ) == NULL) ){
+      daddy[x] = strsep(&daddy[x],",");
       printf("%s\n", daddy[x]);
+    }
   }
 }
