@@ -262,212 +262,214 @@ int main(){
     }
 
   }
+  else{
       
-  int isServer = -1;
-  char b[2];
-  while (isServer == -1){
-    printf("Do you want to be a server (type s) or client (type c)?\n");
-    fgets(b,sizeof(b),stdin);
-    if (b[0] == 's')
-      isServer = 1;
-    else if (b[0] == 'c')
-      isServer = 0;
-    else
-      isServer = -1;
-  }
-
-  if (isServer == 1){
-    //sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
-    set(1);
-    serve();
-    sdone();
-    //set(0);
-  }
-  char k[100];
-  char *args[2];
-  args[0]= "client";
-  
-  if (isServer == 0){
-    //sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
-    char z[256];
-    printf("Please enter the IP you wish to connect to\n");
-    fgets(z,sizeof(z),stdin);
-    z[strcspn(z, "\n")] = 0;
-    args[1] = z;
-    set1(1);
-    clien(2,args);
-    sdone1();
-    //set1(0);
-  }
-
-  int chosen = 0;
-  
-  while(1){
-    if(!chosen){
-      char c1[256];
-      char c2[256];
-      char c3[256];
-      char class[266];
-      char class2[266];
-      printf("Welcome\n");
-
-      int k = 0;
-      while (k < 3){
-	if (k == 0)
-	  printf("\nChoose your first character. Type the name:\n");
-	if (k == 1)
-	  printf("\nChoose your second character. Type the name:\n");
-	if (k == 2)
-	  printf("\nChoose your third character. Type the name:\n");
-	
-	//where we would need to list all the possible people, preety easy
-	printCharac(c1,c2);
-	if (k == 0)
-	  fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice
-
-	int fd = open( "Players.txt", O_RDONLY );
-	char buff[1024];
-	read( fd, buff, sizeof(buff) );
-	close( fd );
-
-	strcpy(class, "antidisestablishmentarianism");
-
-	while ( strstr(buff, class) == NULL ){
-	  printf("\nPlease type name only, exactly as seen:\n> ");
-	  fgets(class,sizeof(class),stdin);
-	  class[strcspn(class, "\n")] = 0;
-	  //printf("%s\n", class);
-	  //printf("%s\n", buff);
-	}
-
-	if (k == 0)
-	  strcpy(c1,class);
-	if (k == 1)
-	  strcpy(c2,class);
-	if (k == 2)
-	  strcpy(c3,class);
-	k++;
-	
-	printf("%s selected.\n", class);
-      }
-      
-      chosen = 1;
-      char e1[256];
-      char e2[256];
-      char e3[256];
-
-      if (isServer){
-	sendclient(c1);
-	serve();//dies after this
-	strcpy(e1,gotvalue());
-	sendclient(c2);
-	serve();
-	strcpy(e2,gotvalue());
-	sendclient(c3);
-	serve();
-	strcpy(e3,gotvalue());
-	initialize(e1,e2,e3,opponent,en1,en2,en3);
-      }
-      else if(!isServer){
-	sendserv(c1);
-	clien(1,args);//dies after this
-	strcpy(e1,gotvalue1());
-	sendserv(c2);
-	clien(1,args);
-	strcpy(e2,gotvalue1());
-	sendserv(c3);
-	clien(1,args);
-	strcpy(e3,gotvalue1());
-	initialize(e1,e2,e3,opponent,en1,en2,en3);
-      }
-      initialize(c1,c2,c3,party,man1,man2,man3);
-      
-      //printf("party member #1: %s\n", party[0].name);
-      //printf("party member #2: %s\n", party[1].name);
-      //printf("party member #3: %s\n", party[2].name);
+    int isServer = -1;
+    char b[2];
+    while (isServer == -1){
+      printf("Do you want to be a server (type s) or client (type c)?\n");
+      fgets(b,sizeof(b),stdin);
+      if (b[0] == 's')
+	isServer = 1;
+      else if (b[0] == 'c')
+	isServer = 0;
+      else
+	isServer = -1;
     }
-    else{
-      int myHP = 1;
-      int enHP = 1;
-      int curse;
-      int turn = 0;
-      struct character attacker;
-      char commands[256];
 
-      struct character everyone[6];
-      int mymax = 0;
-      int enmax = 0;
-      int curse2;
-      for (curse = 0; curse < 6; curse++){//sorting by initiative
-	for (curse2 = 0; curse2 < 3; curse2++){
-	  if (party[curse2].initv > party[mymax].initv)
-	    mymax = curse2;
-	}
-	for (curse2 = 0; curse2 < 3; curse2++){
-	  if (opponent[curse2].initv > opponent[enmax].initv)
-	    enmax = curse2;
-	}
-	if (party[mymax].initv > opponent[enmax].initv){
-	  copystruct(&everyone[curse], &party[mymax]);
-	  party[mymax].initv = -1;
-	}
-	else{
-	  copystruct(&everyone[curse], &opponent[enmax]);
-	  opponent[enmax].initv = -1;//sorry buddy
-	}
-      }
+    if (isServer == 1){
+      //sendclient("sending basic message from server to client\n"); // by putting this here can send custom info from server to client (string only)
+      set(1);
+      serve();
+      sdone();
+      //set(0);
+    }
+    char k[100];
+    char *args[2];
+    args[0]= "client";
+  
+    if (isServer == 0){
+      //sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
+      char z[256];
+      printf("Please enter the IP you wish to connect to\n");
+      fgets(z,sizeof(z),stdin);
+      z[strcspn(z, "\n")] = 0;
+      args[1] = z;
+      set1(1);
+      clien(2,args);
+      sdone1();
+      //set1(0);
+    }
 
-      while (myHP > 0 && enHP > 0){
-	for(curse = 0; curse < 3; curse++){
-	  myHP += party[curse].hp;
-	}
-	for(curse = 0; curse < 3; curse++){
-	  enHP += opponent[curse].hp;
-	}
-	//game itself begins here
-	turn = turn % 6;
-	copystruct(&attacker, &everyone[turn]);
+    int chosen = 0;
+  
+    while(1){
+      if(!chosen){
+	char c1[256];
+	char c2[256];
+	char c3[256];
+	char class[266];
+	char class2[266];
+	printf("Welcome\n");
 
-	if (!isServer){//DELETE DIAGNOSTIC PRINTFS LATER
-	  if (myCharacter(attacker.name)){
-	    printf("this is a client character\n");
-	    if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
-	      printf("the client gets next turn: (n)%s (c)%s\n", everyone[(turn + 1) % 6].name, attacker.name);
-	      respond(isServer, &enHP, args);
-	    }//if the next character has the same name
-	    else{//insert actions here
-	      act(isServer, &myHP, attacker, opponent, commands, args);
-	    }
-	  }//if it's the client's character
-	  else{//response here
-	    printf("this is not your character, client\n");
-	    respond(isServer, &enHP, args);
+	int k = 0;
+	while (k < 3){
+	  if (k == 0)
+	    printf("\nChoose your first character. Type the name:\n");
+	  if (k == 1)
+	    printf("\nChoose your second character. Type the name:\n");
+	  if (k == 2)
+	    printf("\nChoose your third character. Type the name:\n");
+	
+	  //where we would need to list all the possible people, preety easy
+	  printCharac(c1,c2);
+	  if (k == 0)
+	    fgets(class2,sizeof(class2),stdin); // this first fgets is getting something else strange, need to do twice
+
+	  int fd = open( "Players.txt", O_RDONLY );
+	  char buff[1024];
+	  read( fd, buff, sizeof(buff) );
+	  close( fd );
+
+	  strcpy(class, "antidisestablishmentarianism");
+
+	  while ( strstr(buff, class) == NULL ){
+	    printf("\nPlease type name only, exactly as seen:\n> ");
+	    fgets(class,sizeof(class),stdin);
+	    class[strcspn(class, "\n")] = 0;
+	    //printf("%s\n", class);
+	    //printf("%s\n", buff);
 	  }
-	}//if it's the client
-	else{
-	  if (myCharacter(attacker.name)){
-	    if ( strstr( everyone[(turn + 5) % 6].name, attacker.name ) != NULL ){//response here
-	      printf("the server got last turn: (n)%s (c)%s\n", everyone[(turn + 5) % 6].name, attacker.name);
-	      respond(isServer, &enHP, args);
-	    }//if the previous character has the same name
-	    else{//insert actions here
-	      act(isServer, &myHP, attacker, opponent, commands, args);
-	    }
-	  }//if it's the server's character
-	  else{//response here
-	    printf("this is not your character, server\n");
-	    respond(isServer, &enHP, args);
-	  }
-	}//if it's the server
-	turn++;
-      }//end HP while loop
-      if (myHP > 0){
-	printf("YOU WIN\n");
-	break;
+
+	  if (k == 0)
+	    strcpy(c1,class);
+	  if (k == 1)
+	    strcpy(c2,class);
+	  if (k == 2)
+	    strcpy(c3,class);
+	  k++;
+	
+	  printf("%s selected.\n", class);
+	}
+      
+	chosen = 1;
+	char e1[256];
+	char e2[256];
+	char e3[256];
+
+	if (isServer){
+	  sendclient(c1);
+	  serve();//dies after this
+	  strcpy(e1,gotvalue());
+	  sendclient(c2);
+	  serve();
+	  strcpy(e2,gotvalue());
+	  sendclient(c3);
+	  serve();
+	  strcpy(e3,gotvalue());
+	  initialize(e1,e2,e3,opponent,en1,en2,en3);
+	}
+	else if(!isServer){
+	  sendserv(c1);
+	  clien(1,args);//dies after this
+	  strcpy(e1,gotvalue1());
+	  sendserv(c2);
+	  clien(1,args);
+	  strcpy(e2,gotvalue1());
+	  sendserv(c3);
+	  clien(1,args);
+	  strcpy(e3,gotvalue1());
+	  initialize(e1,e2,e3,opponent,en1,en2,en3);
+	}
+	initialize(c1,c2,c3,party,man1,man2,man3);
+      
+	//printf("party member #1: %s\n", party[0].name);
+	//printf("party member #2: %s\n", party[1].name);
+	//printf("party member #3: %s\n", party[2].name);
       }
       else{
-	printf("OPPONENT WON\n");
-	break;
+	int myHP = 1;
+	int enHP = 1;
+	int curse;
+	int turn = 0;
+	struct character attacker;
+	char commands[256];
+
+	struct character everyone[6];
+	int mymax = 0;
+	int enmax = 0;
+	int curse2;
+	for (curse = 0; curse < 6; curse++){//sorting by initiative
+	  for (curse2 = 0; curse2 < 3; curse2++){
+	    if (party[curse2].initv > party[mymax].initv)
+	      mymax = curse2;
+	  }
+	  for (curse2 = 0; curse2 < 3; curse2++){
+	    if (opponent[curse2].initv > opponent[enmax].initv)
+	      enmax = curse2;
+	  }
+	  if (party[mymax].initv > opponent[enmax].initv){
+	    copystruct(&everyone[curse], &party[mymax]);
+	    party[mymax].initv = -1;
+	  }
+	  else{
+	    copystruct(&everyone[curse], &opponent[enmax]);
+	    opponent[enmax].initv = -1;//sorry buddy
+	  }
+	}
+
+	while (myHP > 0 && enHP > 0){
+	  for(curse = 0; curse < 3; curse++){
+	    myHP += party[curse].hp;
+	  }
+	  for(curse = 0; curse < 3; curse++){
+	    enHP += opponent[curse].hp;
+	  }
+	  //game itself begins here
+	  turn = turn % 6;
+	  copystruct(&attacker, &everyone[turn]);
+
+	  if (!isServer){//DELETE DIAGNOSTIC PRINTFS LATER
+	    if (myCharacter(attacker.name)){
+	      printf("this is a client character\n");
+	      if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
+		printf("the client gets next turn: (n)%s (c)%s\n", everyone[(turn + 1) % 6].name, attacker.name);
+		respond(isServer, &enHP, args);
+	      }//if the next character has the same name
+	      else{//insert actions here
+		act(isServer, &myHP, attacker, opponent, commands, args);
+	      }
+	    }//if it's the client's character
+	    else{//response here
+	      printf("this is not your character, client\n");
+	      respond(isServer, &enHP, args);
+	    }
+	  }//if it's the client
+	  else{
+	    if (myCharacter(attacker.name)){
+	      if ( strstr( everyone[(turn + 5) % 6].name, attacker.name ) != NULL ){//response here
+		printf("the server got last turn: (n)%s (c)%s\n", everyone[(turn + 5) % 6].name, attacker.name);
+		respond(isServer, &enHP, args);
+	      }//if the previous character has the same name
+	      else{//insert actions here
+		act(isServer, &myHP, attacker, opponent, commands, args);
+	      }
+	    }//if it's the server's character
+	    else{//response here
+	      printf("this is not your character, server\n");
+	      respond(isServer, &enHP, args);
+	    }
+	  }//if it's the server
+	  turn++;
+	}//end HP while loop
+	if (myHP > 0){
+	  printf("YOU WIN\n");
+	  break;
+	}
+	else{
+	  printf("OPPONENT WON\n");
+	  break;
+	}
       }
     }
   }
