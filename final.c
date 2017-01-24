@@ -74,11 +74,13 @@ int randint() {
 
 void addToStruct( struct character *dude, char *stuff ){
   int w = 0;
-  char * x;
+  char *x;
   while ( w < 8 ){
     x = strsep(&stuff, ",");
-    if (w == 0)
+    if (w == 0){
+      //      printf("this is going in: %s\n", x);
       dude -> name = x;
+    }
     else if (w == 1)
       dude -> hp = atoi(x);
     else if (w == 2)
@@ -95,6 +97,7 @@ void addToStruct( struct character *dude, char *stuff ){
       dude -> initv = atoi(x);
     w++;
   }
+  //printf("this is coming out: %s\n", dude->name);
 }
 
 void copystruct(struct character *s1, struct character *s2){
@@ -106,7 +109,7 @@ void copystruct(struct character *s1, struct character *s2){
   s1->matk = s2->matk;
   s1->mdef = s2->mdef;
   s1->initv = s2->initv;
-  //printf("%s %s\n", s1.name, s2.name);
+  //printf("%s %s\n", s1->name, s2->name);
 }
 
 int myCharacter(char * name){
@@ -143,9 +146,9 @@ void initialize(char * c1, char * c2, char *c3, struct character array[], struct
  
   for ( x; x < i - 1; x++ ){
     if (strstr(daddy[x],c1) != NULL){
-      printf("%s\n", daddy[x]);
+      //      printf("%s\n", daddy[x]);
       addToStruct( &a, daddy[x] );
-      printf("%s\n", a.name);
+      //      printf("%s\n", a.name);
       array[z] = a;
       z++;
     }
@@ -250,8 +253,6 @@ int main(){
 	
 	printf("%s selected.\n", class);
       }
-      //printf("we made it here\n");
-      initialize(c1,c2,c3,party,man1,man2,man3);
       
       chosen = 1;
       char e1[256];
@@ -260,7 +261,7 @@ int main(){
 
       if (isServer){
 	sendclient(c1);
-	serve();
+	serve();//dies after this
 	strcpy(e1,gotvalue());
 	sendclient(c2);
 	serve();
@@ -272,7 +273,7 @@ int main(){
       }
       else if(!isServer){
 	sendserv(c1);
-	clien(1,args);
+	clien(1,args);//dies after this
 	strcpy(e1,gotvalue1());
 	sendserv(c2);
 	clien(1,args);
@@ -282,6 +283,11 @@ int main(){
 	strcpy(e3,gotvalue1());
 	initialize(e1,e2,e3,opponent,en1,en2,en3);
       }
+      initialize(c1,c2,c3,party,man1,man2,man3);
+      
+      printf("party member #1: %s\n", party[0].name);
+      printf("party member #2: %s\n", party[1].name);
+      printf("party member #3: %s\n", party[2].name);
     }
     else{
       int myHP = 1;
@@ -301,7 +307,6 @@ int main(){
 	    mymax = curse2;
 	}
 	for (curse2 = 0; curse2 < 3; curse2++){
-	  //printf("%d initiative testing\n", opponent[curse2].initv);
 	  if (opponent[curse2].initv > opponent[enmax].initv)
 	    enmax = curse2;
 	}
@@ -313,7 +318,6 @@ int main(){
 	  copystruct(&everyone[curse], &opponent[enmax]);
 	  opponent[enmax].initv = -1;//sorry buddy
 	}
-	printf("%s  %d initiative testing\n", everyone[curse].name, everyone[curse].initv);
       }
 
       while (myHP > 0 && enHP > 0){
