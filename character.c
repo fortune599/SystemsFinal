@@ -33,7 +33,7 @@ int damage(struct character *pl, struct character *en){
 
 void describe(char * name){
   if (!strcmp(name,"DonWalf"))
-    printf("Please pass us");
+    printf("baller");
   else if (!strcmp(name,"Suwamik"))
     printf("Swagamick");
   else if (!strcmp(name,"Fortune"))
@@ -51,21 +51,21 @@ void describe(char * name){
   else if (!strcmp(name,"Flash Gordon"))
     printf("fastest train ever");
   else if (!strcmp(name,"Beelzebub"))
-    printf("wtf is this");
+    printf("a baby");
   else if (!strcmp(name,"Starman"))
-    printf("David Bowie???");
+    printf("David Bowie");
   else if (!strcmp(name,"BoJack Horseman"))
-    printf("Bo Jackson???");
+    printf("Ceantuar");
   else if (!strcmp(name,"Darth Daddy"))
-    printf("Force choke me harder");
+    printf("Force choke");
   else if (!strcmp(name,"Donald Drumpf"))
-    printf("All hail");
+    printf("Prez");
   else if (!strcmp(name,"Bill Nye the Science Guy"))
     printf("BILL BILL BILL BILL");
   else if (!strcmp(name,"Honey Boo Boo"))
     printf("gogo juice");
   else
-    printf("wtf fortune");
+    printf("rip spell check");
 }
 
 
