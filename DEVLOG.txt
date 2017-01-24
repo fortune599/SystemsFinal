@@ -82,14 +82,16 @@ January 23, 2017
 	Jackson:
 		-Made additional classes (help from team)
 		-Made DEVLOG
+		-Tried to get lots of stuff to work. Failed, but not for a lack of trying.
 	Suwamik:
 		-Half the coding for dynamic character option display
 		-Various changes and additions
 		-Helped fortune
+		-Tried to get lots of stuff to work. Failed, but not for a lack of trying.
 	Fortune:
 		-Planning and other half of the coding for character option display
-		-Worked on and completed integrating networking and game 
-		-Vital to finishing the project 
+		-Worked on integrating networking and game 
+		--Tried to get lots of stuff to work. Failed, but not for a lack of trying.
 
 
 
