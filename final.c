@@ -158,7 +158,111 @@ void initialize(char * c1, char * c2, char *c3, struct character array[], struct
 
 
 int main(){
+  printf("Do you want to play against AI? type y or n\n");
+  char m[5];
+  fgets(m,sizeof(m),stdin);
+  //m[strcspn(m, "\n")] = 0;
+  if (m[0] == 'y'){
+ 
+    struct character player;
 
+    player.name = "DonWalf";
+    player.hp = 3750;
+    player.ap = 1;
+    player.atk = 100;
+    player.def = 250;
+    player.matk =1;
+    player.mdef = 1;
+    player.initv = 299;
+    
+
+    struct character enemy;
+
+    enemy.name = "Suwamik";
+    enemy.hp = 3500;
+    enemy.ap = 1;
+    enemy.atk = 150;
+    enemy.def = 175.5;
+    enemy.matk = 1;
+    enemy.mdef = 1;
+    enemy.initv = 250;
+    
+    //addToStruct(&enemy,"Suwamik,3500,1,275,175,1,1,250");
+    
+    while(1){
+      int ai = randint() % 3;
+      if(enemy.hp < 0){
+	printf("you win\n");
+	return 0;
+      }
+      if(player.hp < 0){
+	printf("you lose\n");
+	return 0;
+      }
+      char a[256];
+      printf("Enemy health is: %d\n", enemy.hp);
+      printf("Your health is: %d\n", player.hp); 
+      printf("Enter a to attack, enter s to cast spell, enter d to defend\n");
+      fgets(a,sizeof(a),stdin);
+      if(a[0] == 'a'){
+	if(ai == 2){
+	  printf("enemy defends\n");
+	  enemy.hp -= player.atk * 2 /1.5;
+	}
+	else{
+	  printf("you attack\n");
+	  enemy.hp -= player.atk * 2 - enemy.def;
+	}
+      }
+      if(a[0] == 's'){
+	if(ai == 2){
+	  printf("enemy defends the spell\n");
+	  enemy.hp -= player.atk * 4 - (1.5 * enemy.def);
+	}
+	else{
+	  printf("you cast a powerful spell\n");
+	  enemy.def -= player.atk *4;
+	}
+      }
+      if(a[0] == 'd'){
+	printf("your defense rises\n");
+	player.def+=50; // implement further
+      }
+
+      // glitch sometimes no action is taken
+      if(ai == 0){
+	if(a[0] == 1){
+	  printf("You defended enemy attack\n\n");
+	  player.hp -= enemy.atk *2/ 1.5;
+	}
+	else{
+	  printf("Enemy attacks\n");
+	  player.hp-= enemy.atk * 2 -player.def;
+	}
+      }
+      if(ai == 1){
+	if(a[0] == 1){
+	  printf("You defended enemy spell\n");
+	  player.hp -= enemy.atk *4 - player.def;
+	}
+	else{
+	  printf("Enemy casts spell\n");
+	  player.hp -= enemy.atk * 4;
+	}
+      }
+      if(ai == 2){
+	printf("Enemy defends\n");
+	enemy.def += 50;// implement further 
+      }
+    
+    
+    printf("------------------\n");
+  
+    
+    }
+
+  }
+      
   int isServer = -1;
   char b[2];
   while (isServer == -1){
