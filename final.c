@@ -185,8 +185,13 @@ int main(){
   
   if (isServer == 0){
     //sendserv("custom message for server\n"); // allows you to send custom info from client to the server (string only)
+    char z[256];
+    printf("Please enter the IP you wish to connect to\n");
+    fgets(z,sizeof(z),stdin);
+    z[strcspn(z, "\n")] = 0;
+    args[1] = z;
     set1(1);
-    clien(1,args);
+    clien(2,args);
     sdone1();
     //set1(0);
   }
