@@ -16,6 +16,19 @@
 //#include "client.c"
 #include "character.c"
 
+struct character man1;
+struct character man2;
+struct character man3;
+
+struct character en1;
+struct character en2;
+struct character en3;
+
+struct character party[3];
+struct character opponent[3];
+
+
+
 //test case
 struct character test;
 char  save[1000];
@@ -145,17 +158,6 @@ void initialize(char * c1, char * c2, char *c3, struct character array[], struct
 
 
 int main(){
-  struct character man1;
-  struct character man2;
-  struct character man3;
-
-  struct character en1;
-  struct character en2;
-  struct character en3;
-
-  struct character party[3];
-  struct character opponent[3];
-
 
   int isServer = -1;
   char b[2];
