@@ -6,7 +6,7 @@ Kart Mario,1,1,1,1,1,1,5
 Goku,1,1,1,1,1,1,6
 Zelda,1,1,1,1,1,1,7
 Samus,1,1,1,1,1,1,8
-Flash,1,1,1,1,1,1,9
+Flash Gordon,1,1,1,1,1,1,9
 Beelzebub,1,1,1,1,1,1,10
 Starman,1,1,1,1,1,1,11
 BoJack Horseman,1,1,1,1,1,1,12
