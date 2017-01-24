@@ -22,15 +22,14 @@ void printCharac(char * c1, char * c2){
   char * s = buff;
   while( s ){
     daddy[i] = strsep(&s, "\n");
-    if (c1[0] == '\0' && c2[0] == '\0')
-      printf("%s\n",strsep(&daddy[i],","));
-    if (c1[0] != '\0' && c2[0] != '\0')
-      if (strstr(daddy[i],c1) == NULL && strstr(daddy[i],c2) == NULL)
-    	printf("%s\n",strsep(&daddy[i],","));
-    if (c1[0] != '\0' && c2[0] == '\0')
-      if (strstr(daddy[i],c1) == NULL && strstr(daddy[i],c2) != NULL)
-    	printf("%s\n",strsep(&daddy[i],","));
     i++;
+    printf("%s\n", daddy[i]);
+  }
+
+  int x = i;
+  for (i = 0; i < x; i++){
+    if ( (strstr ( daddy[i], c1 ) == NULL) && (strstr ( daddy[i], c2 ) == NULL) )
+      printf("%s\n", daddy[i]);
   }
 }
 
