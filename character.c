@@ -26,6 +26,11 @@ struct character{
   int initv;
 };
 
+int damage(struct character *pl, struct character *en){
+  en->hp -=  (pl->atk * pl->atk) / en->def;
+  return en->hp;
+}
+
 void describe(char * name){
   if (!strcmp(name,"DonWalf"))
     printf("Please pass us");
@@ -104,7 +109,7 @@ void printCharac(char * c1, char * c2){
   }
 }
 
-void respond(int isServer, int *myHP, int *enHP, char *args[]){
+void respond(int isServer, int *enHP, char *args[]){
   if (!isServer){
     sendserv("wasted space");
     clien(1, args);//hangs up here
@@ -121,23 +126,75 @@ void respond(int isServer, int *myHP, int *enHP, char *args[]){
   }
 }
 
-void act(int isServer, int *myHP, int *enHP, struct character attacker, char commands[], char *args[]){
+void act(int isServer, int *myHP, struct character attacker, struct character opponent[], char commands[], char *args[]){
+  char msg[256] = "";
+  int dmg;
+  char stor[128];
+
   printf("\nSELECT %s's ACTION:\n", attacker.name);
-  printf("Attack | Ability | Defend | Concede\n");
+  printf("Attack | Defend | Concede\n");
   fgets(commands, sizeof(commands), stdin);
   commands[strcspn(commands, "\n")] = 0;
   if (!isServer){
-    if ( strstr(commands, "Concede") != NULL ){
+    if ( strstr(commands, "Attack") != NULL ){
+      printf("SELECT TARGET\n");
+      int i = 0;
+      for (i; i < 3; i++){
+	printf("%s  ", opponent[i].name);
+      }
+      printf("\n");
+      fgets(commands, sizeof(commands), stdin);
+      commands[strcspn(commands, "\n")] = 0;
+      for (i = 0; i < 3; i++){
+	if (strstr (opponent[i].name, commands) != NULL){
+	  strcat(msg, opponent[i].name);
+	  strcat(msg, " ");
+	  dmg = damage(&attacker, &opponent[i]);
+	  sprintf(stor, "%d", dmg);
+	  strcat(msg, stor);
+	  printf("Enemy %s has %d health remaining!\n", opponent[i].name, dmg);
+	  sendserv(msg);
+	  clien(1, args);
+	  break;
+	}
+      }
+    }
+    else if ( strstr(commands, "Concede") != NULL ){
       printf("sending concession");
-      sendserv("enHP 0");
+      strcpy(msg, "enHP 0");
+      sendserv(msg);
       clien(1, args);
       *myHP = 0;
     }
   }
   else{
-    if ( strstr(commands, "Concede") != NULL ){
+    if ( strstr(commands, "Attack") != NULL ){
+      printf("SELECT TARGET\n");
+      int i = 0;
+      for (i; i < 3; i++){
+        printf("%s  ", opponent[i].name);
+      }
+      printf("\n");
+      fgets(commands, sizeof(commands), stdin);
+      commands[strcspn(commands, "\n")] = 0;
+      for (i = 0; i < 3; i++){
+        if (strstr (opponent[i].name, commands) != NULL){
+          strcat(msg, opponent[i].name);
+          strcat(msg, " ");
+          dmg = damage(&attacker, &opponent[i]);
+          sprintf(stor, "%d", dmg);
+          strcat(msg, stor);
+          printf("Enemy %s has %d health remaining!\n", opponent[i].name, dmg);
+          sendclient(msg);
+          serve();
+          break;
+        }
+      }
+    }
+    else if ( strstr(commands, "Concede") != NULL ){
       printf("sending concession\n");
-      sendclient("enHP 0");//hangs up here
+      strcpy(msg, "enHP 0");
+      sendclient(msg);//hangs up here
       serve();
       *myHP = 0;
     }

@@ -16,17 +16,6 @@
 //#include "client.c"
 #include "character.c"
 
-struct character man1;
-struct character man2;
-struct character man3;
-
-struct character en1;
-struct character en2;
-struct character en3;
-
-struct character party[3];
-struct character opponent[3];
-
 //test case
 struct character test;
 char  save[1000];
@@ -42,10 +31,6 @@ void getvalue(){
 
 void setValue(int * stat, int newVal){
   *stat = newVal;
-}
-
-void damage(int platk, int endef, int enhp){
-  enhp -=  (platk * platk) / endef;
 }
 
 void mdamage(int plmatk, int platk, int plap, int enmdef, int enhp, int cost){
@@ -101,7 +86,7 @@ void copystruct(struct character *s1, struct character *s2){
   //printf("%s %s\n", s1->name, s2->name);
 }
 
-int myCharacter(char * name){
+int myCharacter(char * name, struct character  party[]){
   int i;
   for(i = 0; i < 3; i++){
     if ( strstr( party[i].name, name ) != NULL)
@@ -160,6 +145,18 @@ void initialize(char * c1, char * c2, char *c3, struct character array[], struct
 
 
 int main(){
+  struct character man1;
+  struct character man2;
+  struct character man3;
+
+  struct character en1;
+  struct character en2;
+  struct character en3;
+
+  struct character party[3];
+  struct character opponent[3];
+
+
   int isServer = -1;
   char b[2];
   while (isServer == -1){
@@ -321,34 +318,34 @@ int main(){
 	copystruct(&attacker, &everyone[turn]);
 
 	if (!isServer){//DELETE DIAGNOSTIC PRINTFS LATER
-	  if (myCharacter(attacker.name)){
+	  if (myCharacter(attacker.name, party)){
 	    printf("this is a client character\n");
 	    if ( strstr( everyone[(turn + 1) % 6].name, attacker.name ) != NULL ){//response here
 	      printf("the client gets next turn: (n)%s (c)%s\n", everyone[(turn + 1) % 6].name, attacker.name);
-	      respond(isServer, &myHP, &enHP, args);
+	      respond(isServer, &enHP, args);
 	    }//if the next character has the same name
 	    else{//insert actions here
-	      act(isServer, &myHP, &enHP, attacker, commands, args);
+	      act(isServer, &myHP, attacker, opponent, commands, args);
 	    }
 	  }//if it's the client's character
 	  else{//response here
 	    printf("this is not your character, client\n");
-	    respond(isServer, &myHP, &enHP, args);
+	    respond(isServer, &enHP, args);
 	  }
 	}//if it's the client
 	else{
-	  if (myCharacter(attacker.name)){
+	  if (myCharacter(attacker.name, party)){
 	    if ( strstr( everyone[(turn + 5) % 6].name, attacker.name ) != NULL ){//response here
 	      printf("the server got last turn: (n)%s (c)%s\n", everyone[(turn + 5) % 6].name, attacker.name);
-	      respond(isServer, &myHP, &enHP, args);
+	      respond(isServer, &enHP, args);
 	    }//if the previous character has the same name
 	    else{//insert actions here
-	      act(isServer, &myHP, &enHP, attacker, commands, args);
+	      act(isServer, &myHP, attacker, opponent, commands, args);
 	    }
 	  }//if it's the server's character
 	  else{//response here
 	    printf("this is not your character, server\n");
-	    respond(isServer, &myHP, &enHP, args);
+	    respond(isServer, &enHP, args);
 	  }
 	}//if it's the server
 	turn++;
