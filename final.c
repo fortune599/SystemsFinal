@@ -207,7 +207,7 @@ int main(){
       char c1[256];
       char c2[256];
       char c3[256];
-      char class[266] = "";
+      char class[266];
       char class2[266];
       printf("Welcome\n");
 
@@ -230,7 +230,6 @@ int main(){
 	read( fd, buff, sizeof(buff) );
 	close( fd );
 
-	strcpy(class2, class);
 	strcpy(class, "antidisestablishmentarianism");
 
 	while ( strstr(buff, class) == NULL ){

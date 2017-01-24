@@ -23,13 +23,11 @@ void printCharac(char * c1, char * c2){
   while( s ){
     daddy[i] = strsep(&s, "\n");
     i++;
-    printf("%s\n", daddy[i]);
   }
 
-  int x = i;
-  for (i = 0; i < x; i++){
-    if ( (strstr ( daddy[i], c1 ) == NULL) && (strstr ( daddy[i], c2 ) == NULL) )
-      printf("%s\n", daddy[i]);
+  int x = 0;
+  for (x; x < i; x++){
+    if ( (strstr ( daddy[x], c1 ) == NULL) && (strstr ( daddy[x], c2 ) == NULL) )
+      printf("%s\n", daddy[x]);
   }
 }
-
